@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useFonts } from 'expo-font';
 // import { AppLoading } from 'expo';
 import * as SplashScreen from 'expo-splash-screen';
@@ -7,7 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './screens/home';
 import Messages from './screens/messages';
-import Header from './shared/header'
+import Header from './shared/header';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -51,6 +51,7 @@ export default function App() {
             fontWeight: 'bold',
           },
         }} />
+        <Stack.Screen name="Header" component={Header} />
       </Stack.Navigator>
     </NavigationContainer>
   );
