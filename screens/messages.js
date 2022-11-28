@@ -7,7 +7,7 @@ export default function Messages({ navigation, route }) {
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text>Messages Screen</Text>
             <Button
-                title="Go to Details... again"
+                title="Go to Home Screen"
                 onPress={() => navigation.navigate('Home')}
             />
         </View>

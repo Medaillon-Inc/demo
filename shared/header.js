@@ -1,34 +1,49 @@
 import { useCallback } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
+import { globalStyles } from '../styles/global';
 import { useFonts } from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
+import Messages from '../screens/messages';
+import { useNavigation } from '@react-navigation/native';
 
-SplashScreen.preventAutoHideAsync();
-
-export default function Header({ route, title }) {
+export default function Header({ navigation, title }) {
+    const navigator = useNavigation();
 
     const [fontsLoaded] = useFonts({
         'Billabong': require('../assets/fonts/Billabong.ttf'),
     });
 
     const onLayoutRootView = useCallback(async () => {
-        if (fontsLoaded) {
-            await SplashScreen.hideAsync();
+        if (!fontsLoaded) {
+            return (
+                <Text>Bi bok dönmedi</Text>
+            )
         }
     }, [fontsLoaded]);
 
-    if (!fontsLoaded) {
-        return (
-            <Text>Bi bok yuklenmedi</Text>
-        )
-    }
-
     return (
-        <View style={styles.header} onLayout={onLayoutRootView}>
-            <Text styles={styles.headerText}>Medaillon</Text>
-            <AntDesign name='message1' size={28} style={styles.icon} />
+        <View style={styles.header}>
+            <Text style={{ ...styles.headerTitleStyle, fontFamily: 'Billabong', fontSize: 27 }}>{title}</Text>
+            <View style={styles.icons}>
+                <TouchableOpacity onPress={() => navigator.navigate('Messages')}>
+                    <MaterialIcons style={styles.icon} name="add-box" size={28} color="black" />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigator.navigate('Messages')}>
+                    <FontAwesome style={styles.icon} name="heart-o" size={24} color="black" />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigator.navigate('Messages')}>
+                    <AntDesign style={styles.icon} name='message1' size={24} />
+                </TouchableOpacity>
+            </View>
         </View>
+        // <View style={styles.header} onLayout={onLayoutRootView}>
+        //     <Text styles={globalStyles.titleText}>Medaillon</Text>
+        //     <TouchableOpacity style={styles.icon} onPress={() => navigation.navigate('Messages')}>
+        //         <AntDesign name='message1' size={28} />
+        //     </TouchableOpacity>
+        // </View>
     );
 }
 
@@ -40,15 +55,27 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         // justifyContent: 'center',
     },
+    headerTitleStyle: {
+        fontFamily: 'Billabong',
+        fontSize: 28,
+        marginStart: 10,
+        marginTop: 10,
+    },
     headerText: {
         fontFamily: 'Billabong',
         fontSize: 35,
         color: '#333',
         letterSpacing: 1,
     },
-    icon: {
+    icons: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 10,
         position: 'absolute',
         right: 30,
+    },
+    icon: {
+        marginLeft: 20,
     },
     headerTitle: {
         flexDirection: 'row'

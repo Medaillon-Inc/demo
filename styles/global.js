@@ -5,7 +5,7 @@ export const globalStyles = StyleSheet.create({
     titleText: {
         fontFamily: "Billabong",
         fontSize: 18,
-        fontWeight: 'bold',
+        // fontWeight: 'bold',
         color: '#333',
     },
     paragraph: {
