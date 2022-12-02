@@ -33,3 +33,14 @@ export const images = {
         '5': require('../assets/modelPhotos/profilephotos/barbarapalvin.jpg'),
     },
 };
+
+export const notificationData = {
+    profilePhotos: {
+        '1': require('../assets/modelPhotos/profilephotos/victoriassecret.jpg'),
+        '2': require('../assets/modelPhotos/profilephotos/asliates.jpg'),
+        '3': require('../assets/modelPhotos/profilephotos/jenselter.jpg'),
+        '4': require('../assets/modelPhotos/profilephotos/olyaabramovich.jpg'),
+        '5': require('../assets/modelPhotos/profilephotos/ozgebitmez.jpg'),
+        '6': require('../assets/modelPhotos/profilephotos/tammyhembrow.jpg'),
+    },
+};

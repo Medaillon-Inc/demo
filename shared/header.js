@@ -5,10 +5,9 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { globalStyles } from '../styles/global';
 import { useFonts } from 'expo-font';
-import Messages from '../screens/messages';
 import { useNavigation } from '@react-navigation/native';
 
-export default function Header({ navigation, title }) {
+export default function Header({ navigation, title, navigating }) {
     const navigator = useNavigation();
 
     const [fontsLoaded] = useFonts({
@@ -25,17 +24,19 @@ export default function Header({ navigation, title }) {
 
     return (
         <View style={styles.header}>
-            <Text style={{ ...styles.headerTitleStyle, fontFamily: 'Billabong', fontSize: 27 }}>{title}</Text>
-            <View style={styles.icons}>
-                <TouchableOpacity onPress={() => navigator.navigate('Messages')}>
-                    <MaterialIcons style={styles.icon} name="add-box" size={28} color="black" />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigator.navigate('Messages')}>
-                    <FontAwesome style={styles.icon} name="heart-o" size={24} color="black" />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigator.navigate('Messages')}>
-                    <AntDesign style={styles.icon} name='message1' size={24} />
-                </TouchableOpacity>
+            <View>
+                <Text style={{ ...styles.headerTitleStyle, fontFamily: 'Billabong', fontSize: 27 }}>{title}</Text>
+                <View style={styles.icons}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Messages')}>
+                        <MaterialIcons style={styles.icon} name="add-box" size={28} color="black" />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
+                        <FontAwesome style={styles.icon} name="heart-o" size={24} color="black" />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('Messages')}>
+                        <AntDesign style={styles.icon} name='message1' size={24} />
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
         // <View style={styles.header} onLayout={onLayoutRootView}>
@@ -50,9 +51,10 @@ export default function Header({ navigation, title }) {
 const styles = StyleSheet.create({
     header: {
         width: '100%',
-        height: '100%',
+        height: 100,
         flexDirection: 'row',
         alignItems: 'center',
+        paddingTop: 30,
         // justifyContent: 'center',
     },
     headerTitleStyle: {
@@ -76,9 +78,6 @@ const styles = StyleSheet.create({
     },
     icon: {
         marginLeft: 20,
-    },
-    headerTitle: {
-        flexDirection: 'row'
     },
     headerImage: {
         width: 26,

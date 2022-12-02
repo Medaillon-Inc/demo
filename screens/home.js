@@ -5,7 +5,7 @@ import { globalStyles, images } from '../styles/global';
 import Messages from './messages';
 import PostCard from '../shared/postCard';
 
-export default function Home({ navigation }) {
+export default function Home({ route }) {
     const [reviews, setReviews] = useState([
         { title: 'Merve Taşkın', number: 1, body: 'lorem ipsum', key: '1' },
         { title: 'Bella Thorne', number: 2, body: 'lorem ipsum', key: '2' },
@@ -17,7 +17,7 @@ export default function Home({ navigation }) {
     return (
         <View style={styles.container}>
             <FlatList data={reviews} renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => navigation.navigate('Messages')}>
+                <TouchableOpacity onPress={() => route.params.navigation.navigate('Messages')}>
                     <PostCard>
                         <View style={styles.cardHeader}>
                             <Image source={images.profilePhotos[item.number]} style={styles.profilephoto} />
@@ -39,9 +39,9 @@ export default function Home({ navigation }) {
 }
 
 export const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
+    // container: {
+    //     flex: 1,
+    // },
     cardHeader: {
         flexDirection: 'row',
         alignItems: 'center',
