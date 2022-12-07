@@ -7,7 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Messages from './screens/messages';
 import Search from './screens/search';
-import MedaillonContests from './screens/medaillonContests';
+import Medaillon from './screens/medaillon';
 import Notifications from './screens/notifications';
 import HomeTabs from './tabs/HomeTabs';
 import Header from './shared/header';
@@ -56,7 +56,7 @@ export default function App() {
           // },
           headerTitle: () => <Header title='Ara' />
         }} />
-        <Stack.Screen name="MedaillonContests" component={MedaillonContests} options={{
+        <Stack.Screen name="Medaillon" component={Medaillon} options={{
           title: 'Yarışmalar', headerTitleStyle: {
             fontWeight: 'bold',
           },

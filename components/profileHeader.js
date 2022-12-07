@@ -16,56 +16,39 @@ export default function ProfileHeader({ navigation, title, navigating }) {
         <View style={styles.header}>
             <View style={styles.leftSide}>
                 <Text style={styles.headerTitleStyle}>{title}</Text>
-                <SimpleLineIcons style={{ paddingLeft: 10, }} name="arrow-down" size={10} color="black" />
+                <SimpleLineIcons style={{ paddingLeft: 10, paddingTop: 10, }} name="arrow-down" size={10} color="black" />
             </View>
             <View style={styles.rightSide}>
-                <MaterialIcons style={styles.icon} name="add-box" size={24} color="black" />
+                <MaterialIcons style={styles.icon} name="add-box" size={29} color="black" />
                 <SimpleLineIcons style={styles.icon} name="menu" size={24} color="black" />
             </View>
         </View>
-        // <View style={styles.header}>
-        //     <View>
-        //         <Text style={{ ...styles.headerTitleStyle, fontFamily: 'Billabong', fontSize: 27 }}>{title}</Text>
-        //         <View style={styles.icons}>
-        //             <TouchableOpacity onPress={() => navigation.navigate('Messages')}>
-        //                 <MaterialIcons style={styles.icon} name="add-box" size={28} color="black" />
-        //             </TouchableOpacity>
-        //             <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
-        //                 <FontAwesome style={styles.icon} name="heart-o" size={24} color="black" />
-        //             </TouchableOpacity>
-        //             <TouchableOpacity onPress={() => navigation.navigate('Messages')}>
-        //                 <AntDesign style={styles.icon} name='message1' size={24} />
-        //             </TouchableOpacity>
-        //         </View>
-        //     </View>
-        // </View>
-        // <View style={styles.header} onLayout={onLayoutRootView}>
-        //     <Text styles={globalStyles.titleText}>Medaillon</Text>
-        //     <TouchableOpacity style={styles.icon} onPress={() => navigation.navigate('Messages')}>
-        //         <AntDesign name='message1' size={28} />
-        //     </TouchableOpacity>
-        // </View>
     );
 }
 
 const styles = StyleSheet.create({
     header: {
         width: "100%",
-        height: 100,
+        height: 90,
         paddingTop: 10,
         flexDirection: 'row',
-        alignItems: 'stretch',
+        
+        alignItems: 'center',
         backgroundColor: "white",
         // justifyContent: 'center',
     },
     leftSide: {
-        width: "100%",
         flexDirection: 'row',
         alignItems: 'center',
+        paddingTop: 10,
+        paddingLeft: 5,
     },
     rightSide: {
-        position: 'relative',
-        left: 100,
+        position: "absolute",
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingTop: 35,
+        right: 30,
     },
     headerTitleStyle: {
         fontSize: 23,
@@ -87,7 +70,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     icon: {
-        marginLeft: 20,
+        marginLeft: 30,
     },
     headerImage: {
         width: 26,

@@ -19,18 +19,18 @@ export const globalStyles = StyleSheet.create({
 
 export const images = {
     photos: {
-        '1': require('../assets/modelPhotos/mervetaskin.png'),
+        '1': require('../assets/modelPhotos/barbarapalvin.png'),
         '2': require('../assets/modelPhotos/bellathorne.png'),
         '3': require('../assets/modelPhotos/gigihadid.png'),
         '4': require('../assets/modelPhotos/adrianalima.png'),
-        '5': require('../assets/modelPhotos/barbarapalvin.png'),
+        '5': require('../assets/modelPhotos/mervetaskin.png'),
     },
     profilePhotos: {
-        '1': require('../assets/modelPhotos/profilephotos/mervetaskin.jpg'),
+        '1': require('../assets/modelPhotos/profilephotos/barbarapalvin.jpg'),
         '2': require('../assets/modelPhotos/profilephotos/bellathorne.jpg'),
         '3': require('../assets/modelPhotos/profilephotos/gigihadid.jpg'),
         '4': require('../assets/modelPhotos/profilephotos/adrianalima.jpg'),
-        '5': require('../assets/modelPhotos/profilephotos/barbarapalvin.jpg'),
+        '5': require('../assets/modelPhotos/profilephotos/mervetaskin.jpg'),
     },
 };
 

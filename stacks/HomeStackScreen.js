@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../screens/home';
 import Messages from '../screens/messages';
 import Notifications from '../screens/notifications';
-import MedaillonContests from '../screens/medaillonContests';
+import MedaillonContests from '../screens/medaillon';
 import Search from '../screens/search';
 import Header from '../shared/header';
 
