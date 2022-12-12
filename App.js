@@ -11,6 +11,7 @@ import Medaillon from './screens/medaillon';
 import Notifications from './screens/notifications';
 import HomeTabs from './tabs/HomeTabs';
 import Header from './shared/header';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -36,36 +37,41 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer onReady={onLayoutRootView}>
-      <Stack.Navigator
-        screenOptions={{
-          // headerStyle: {
-          //   backgroundColor: '#f4511e',
-          // },
-          headerTintColor: '#333',
-          headerTitleStyle: {
-            fontFamily: 'Billabong',
-            fontSize: 35,
-          },
-        }}
-      >
-        <Stack.Screen name="HomeTabs" component={HomeTabs} options={{ headerShown: false }} />
-        <Stack.Screen name="Search" component={Search} options={{
-          // title: 'Ara', headerShadowVisible: false, headerTitleStyle: {
-          //   fontWeight: 'bold',
-          // },
-          headerTitle: () => <Header title='Ara' />
-        }} />
-        <Stack.Screen name="Medaillon" component={Medaillon} options={{
-          title: 'Yarışmalar', headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-        }} />
-      </Stack.Navigator>
-      {/* <Tab.Navigator>
+    <SafeAreaProvider>
+      <NavigationContainer onReady={onLayoutRootView}>
+        <Stack.Navigator
+          screenOptions={{
+            // headerStyle: {
+            //   backgroundColor: '#f4511e',
+            // },
+            headerTintColor: '#333',
+            headerTitleStyle: {
+              fontFamily: 'Billabong',
+              fontSize: 35,
+            },
+          }}
+        >
+          <Stack.Screen name="HomeTabs" component={HomeTabs} options={{ headerShown: false }} />
+          <Stack.Screen name="Search" component={Search} options={{
+            // title: 'Ara', headerShadowVisible: false, headerTitleStyle: {
+            //   fontWeight: 'bold',
+            // },
+            headerTitle: () => <Header title='Ara' />
+          }} />
+          <Stack.Screen name="Medaillon" component={Medaillon} options={{
+            title: 'Yarışmalar', headerTitleStyle: {
+              width: 0, height: 0,
+            },
+          }} />
+          <Stack.Screen name="Notifications" component={Notifications} options={{
+            title: 'Bildirimler',
+          }} />
+        </Stack.Navigator>
+        {/* <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeStackScreen} />
         <Tab.Screen name="Messages" component={MessagesStackScreen} />
       </Tab.Navigator> */}
-    </NavigationContainer>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
