@@ -11,6 +11,7 @@ import Reels from '../screens/reels';
 import Medaillon from '../screens/medaillon';
 import Profile from '../screens/profile';
 import Header from '../shared/header';
+import ReelsTopHeader from '../components/reelsTopHeader';
 import ProfileHeader from '../components/profileHeader';
 import { Octicons } from '@expo/vector-icons';
 import { Foundation } from '@expo/vector-icons';
@@ -19,6 +20,10 @@ import { FontAwesome } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+import changeNavigationBarColor, {
+    hideNavigationBar,
+    showNavigationBar,
+} from 'react-native-navigation-bar-color';
 
 {/* <MaterialCommunityIcons name="shopping" size={24} color="black" /> */ }
 {/* <MaterialCommunityIcons name="shopping-outline" size={24} color="black" /> */ }
@@ -30,6 +35,11 @@ export default function HomeTabs({ navigation, route }) {
         <HomeTab.Navigator
             screenOptions={({ route }) => ({
                 tabBarShowLabel: true,
+                tabBarStyle: {
+                    padding: 10,
+                    borderTopWidth: 0,
+                    elevation: 0,
+                },
                 tabBarIcon: ({ focused, color, size }) => {
                     let iconName;
 
@@ -107,8 +117,6 @@ export default function HomeTabs({ navigation, route }) {
                         }
                         return (
 
-                            //     }}
-                            // />
                             <AntDesign name='message1' size={24} />
                         );
                     }
@@ -123,18 +131,32 @@ export default function HomeTabs({ navigation, route }) {
                 },
                 // tabBarActiveBackgroundColor: "black",
                 // tabBarStyle: { backgroundColor: "black" },
-                // tabBarActiveTintColor: 'tomato',
-                // tabBarInactiveTintColor: 'gray',
+                tabBarActiveTintColor: 'white',
+                tabBarInactiveTintColor: 'white',
+                // tabBarActiveBackgroundColor: "white",
             })} >
             <HomeTab.Screen name="Home" component={Home} initialParams={{ navigation }} options={{
                 // headerRight: () => <Header title='Medaillon' navigation={navigation} />,
                 header: () => <Header title='Medaillon' navigation={navigation} />,
+                tabBarStyle: { backgroundColor: "white" },
             }} />
             <HomeTab.Screen name="Search" component={Search} options={{
                 title: 'Ara',
             }} />
             <HomeTab.Screen name="Medaillon" component={Medaillon} options={({ route }) => ({
                 tabBarShowLabel: false,
+                tabBarShowLabel: true,
+                headerTransparent: true,
+                // headerShown: false,
+                tabBarBadgeStyle: {
+                    backgroundColor: "white",
+                    borderTopWidth: 0,
+                    borderTopColor: "white",
+                    elevation: 0
+                },
+                // backgroundColor: 'rgba(52, 52, 52, 0.8)',
+                tabBarStyle: { backgroundColor: "black", },
+                header: () => <ReelsTopHeader title='andreas_sparre' />,
                 // tabBarBadge: 3
             })} />
             <HomeTab.Screen name="Messages" component={Messages} options={{

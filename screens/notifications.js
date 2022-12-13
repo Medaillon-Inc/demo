@@ -21,7 +21,7 @@ export default function Notifications({ navigation, route }) {
                     <PostCard>
                         <View style={styles.cardHeader}>
                             <Image source={notificationData.profilePhotos[item.number]} style={styles.profilephoto} />
-                            {item.name == 'Victoria\'s secret' ? <Text><Text style={styles.username}>{item.name}</Text> ve <Text style={styles.username}>Banana Republic</Text> 23 yeni fotoğraf paylaştı. <Text style={styles.notificationTime}>{item.time}</Text></Text> :
+                            {item.name == 'Victoria\'s secret' ? <Text><Text style={styles.username}>{item.name}</Text> 23 yeni fotoğraf paylaştı. <Text style={styles.notificationTime}>{item.time}</Text></Text> :
                                 <Text><Text style={styles.username}>{item.name}</Text>{item.info}<Text style={styles.notificationTime}>{item.time}</Text></Text>}
                         </View>
                     </PostCard>

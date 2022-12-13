@@ -46,7 +46,6 @@ export default function App() {
             // },
             headerTintColor: '#333',
             headerTitleStyle: {
-              fontFamily: 'Billabong',
               fontSize: 35,
             },
           }}
@@ -61,10 +60,12 @@ export default function App() {
           <Stack.Screen name="Medaillon" component={Medaillon} options={{
             title: 'Yarışmalar', headerTitleStyle: {
               width: 0, height: 0,
+              fontFamily: 'Billabong',
             },
           }} />
           <Stack.Screen name="Notifications" component={Notifications} options={{
             title: 'Bildirimler',
+            headerTitleStyle: { fontWeight: "600", }
           }} />
         </Stack.Navigator>
         {/* <Tab.Navigator>
