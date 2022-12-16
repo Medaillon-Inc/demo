@@ -6,6 +6,8 @@ import * as SplashScreen from 'expo-splash-screen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Messages from './screens/messages';
+import EditProfile from './screens/screenComponents/EditProfile';
+import Profile from './screens/profile';
 import Search from './screens/search';
 import Medaillon from './screens/medaillon';
 import Notifications from './screens/notifications';
@@ -32,7 +34,7 @@ export default function App() {
 
   if (!fontsLoaded) {
     return (
-      <Text>Bi bok yuklenmedi</Text>
+      <Text>Fontlar yüklenemedi</Text>
     )
   }
 
@@ -67,6 +69,7 @@ export default function App() {
             title: 'Bildirimler',
             headerTitleStyle: { fontWeight: "600", }
           }} />
+          <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerShown: false }} />
         </Stack.Navigator>
         {/* <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeStackScreen} />

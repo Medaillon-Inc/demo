@@ -7,10 +7,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { globalStyles } from '../styles/global';
 import { useFonts } from 'expo-font';
-import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/native';
 
 export default function Header({ navigation, title, navigating }) {
-    const navigator = useNavigation();
+    // const navigator = useNavigation();
 
     const [fontsLoaded] = useFonts({
         'Billabong': require('../assets/fonts/Billabong.ttf'),

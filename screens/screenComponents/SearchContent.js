@@ -11,7 +11,7 @@ const SearchContent = props => {
                 require('../../storage/images/palvin2.jpg'),
                 require('../../storage/images/barbarapalvin.png'),
                 require('../../storage/images/hadid2.jpg'),
-                require('../../storage/images/bananarepublic3.jpg'),
+                require('../../storage/images/fawn1.jpg'),
             ],
         },
         {

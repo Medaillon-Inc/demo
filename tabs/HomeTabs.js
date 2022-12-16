@@ -10,6 +10,7 @@ import Search from '../screens/search';
 import Reels from '../screens/reels';
 import Medaillon from '../screens/medaillon';
 import Profile from '../screens/profile';
+import EditProfile from '../screens/screenComponents/EditProfile';
 import Header from '../shared/header';
 import ReelsTopHeader from '../components/reelsTopHeader';
 import ProfileHeader from '../components/profileHeader';
@@ -166,10 +167,14 @@ export default function HomeTabs({ navigation, route }) {
             {/* <HomeTab.Screen name="Reels" component={Reels} options={{
                 // tabBarStyle: { backgroundColor: "black" },
             }} /> */}
-            <HomeTab.Screen name="Profile" component={Profile} options={{
+            <HomeTab.Screen name="Profile" component={Profile} initialParams={{ navigation }} options={{
                 // headerRight: () => <Header title='Medaillon' navigation={navigation} />,
-                header: () => <ProfileHeader title='andreas_sparre' />,
+                header: () => <ProfileHeader title='andreas_sparre' navigation={navigation} />,
             }} />
+            {/* <HomeTab.Screen name="EditProfile" component={EditProfile} initialParams={{ navigation }} options={{
+                // headerRight: () => <Header title='Medaillon' navigation={navigation} />,
+                header: () => <ProfileHeader title='andreas_sparre' navigation={navigation} />,
+            }} /> */}
         </HomeTab.Navigator >
     );
 }
