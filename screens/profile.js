@@ -97,10 +97,13 @@
 
 
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, StatusBar } from 'react-native';
 import { ProfileBody, ProfileButtons } from './screenComponents/ProfileBody';
 import Entypo from 'react-native-vector-icons/Entypo';
 import BottomTabView from './screenComponents/BottomTabView';
+
+
+const statusBarStyle = "white"
 
 const Profile = () => {
     let circuls = [];
@@ -140,9 +143,10 @@ const Profile = () => {
 
     return (
         <View style={{ width: '100%', height: '100%', backgroundColor: 'white' }}>
-            <View style={{ width: '100%', padding: 10 }}>
+            <StatusBar backgroundColor={statusBarStyle} barStyle="dark-content" />
+            <View style={{ width: '100%', padding: 8 }}>
                 <ProfileBody
-                    name="Mr Peobody"
+                    name="andreas_sparre"
                     accountName="mr_peobody"
                     profileImage={require('../storage/images/userProfile.png')}
                     followers="3.6M"
@@ -154,7 +158,7 @@ const Profile = () => {
                     name="Mr Peobody"
                     accountName="mr_peobody"
                     profileImage={require('../storage/images/userProfile.png')}
-                    
+
                 />
             </View>
             <View>

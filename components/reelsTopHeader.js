@@ -22,9 +22,9 @@ export default function ReelsTopHeader() {
 const styles = StyleSheet.create({
     header: {
         width: "100%",
-        height: 90,
-        paddingTop: 20,
-        paddingHorizontal: 20,
+        height: 60,
+        paddingTop: 0,
+        paddingHorizontal: 10,
         flexDirection: 'row',
 
         alignItems: 'center',
@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     reelsOptions: {
-        fontWeight: "500",
-        fontSize: 17,
+        fontWeight: "600",
+        fontSize: 16,
         paddingHorizontal: 10,
         color: "white",
     },

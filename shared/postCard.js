@@ -14,15 +14,14 @@ export default function PostCard(props) {
 
 const styles = StyleSheet.create({
     card: {
-        flex: 1,
+        // flex: 1,
         width: '100%',
-        borderTopWidth: 1,
-        borderColor: 'rgba(158, 150, 150, .5)',
+        // height: '100%',
+        // borderTopWidth: 1,
         paddingTop: 10,
         // borderTopWidth: 1,
         // borderColor: 'rgba(158, 150, 150, .5)',
         // marginTop: 90,
-        // paddingTop: 10,
         // borderRadius: 6,
         // elevation: 3,
         // backgroundColor: '#fff',

@@ -6,7 +6,7 @@ import Ionic from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 
-const SingleReel = ({ item, index, currentIndex }) => {
+const SingleReel = ({ item, index, currentIndex, navigation }) => {
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
 
@@ -125,7 +125,7 @@ const SingleReel = ({ item, index, currentIndex }) => {
                     />
                     <Text style={{ color: 'white' }}>{item.likes}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ padding: 10 }}>
+                <TouchableOpacity style={{ padding: 10 }} onPress={() => navigation.navigate('Comments')} >
                     <Ionic
                         name="ios-chatbubble-outline"
                         style={{ color: 'white', fontSize: 25 }}
@@ -163,7 +163,7 @@ const SingleReel = ({ item, index, currentIndex }) => {
                     />
                 </View>
             </View>
-        </View>
+        </View >
     );
 };
 

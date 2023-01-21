@@ -4,6 +4,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { globalStyles } from '../styles/global';
 import { useFonts } from 'expo-font';
@@ -35,10 +36,11 @@ export default function Header({ navigation, title, navigating }) {
                 </TouchableOpacity> */}
                 <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
                     {/* <FontAwesome style={styles.icon} name="heart-o" size={24} color="black" /> */}
-                    <Ionicons style={styles.icon} name="md-notifications-outline" size={28} color="black" />
+                    <Feather name="search" size={25} color="color: 'rgba(255,255,255,0.7)'" style={{ paddingLeft: 10 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
-                    <SimpleLineIcons style={styles.icon} name="menu" size={24} color="black" />
+                    <Ionicons style={styles.icon} name="md-notifications-outline" size={28} color="color: 'rgba(255,255,255,0.7)'" />
+                    {/* <SimpleLineIcons style={styles.icon} name="menu" size={24} color="white" /> */}
                 </TouchableOpacity>
                 {/* <TouchableOpacity onPress={() => navigation.navigate('Messages')}>
                     <AntDesign style={styles.icon} name='message1' size={24} />
@@ -58,24 +60,26 @@ export default function Header({ navigation, title, navigating }) {
 const styles = StyleSheet.create({
     header: {
         width: '100%',
-        height: 100,
+        height: 56,
         flexDirection: 'row',
         alignItems: 'center',
-        paddingTop: 30,
+        paddingTop: 0,
+        backgroundColor: '#141414'
         // justifyContent: 'center',
     },
     leftSide: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingTop: 10,
+        paddingTop: 0,
         paddingLeft: 5,
     },
     headerTitleStyle: {
         fontFamily: 'Billabong',
-        marginStart: 10,
-        marginTop: 10,
+        paddingStart: 15,
+        paddingTop: 17,
         fontFamily: 'Billabong',
-        fontSize: 35,
+        fontSize: 30,
+        color: 'rgba(255,255,255,0.7)'
     },
     // headerText: {
     //     fontFamily: 'Billabong',
@@ -86,7 +90,7 @@ const styles = StyleSheet.create({
     icons: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingTop: 38,
+        paddingTop: 5,
         position: 'absolute',
         right: 30,
     },

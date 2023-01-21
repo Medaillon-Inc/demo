@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
-import { StyleSheet, StatusBar, View, Button, Text, TouchableOpacity, FlatList, Image, Dimensions } from 'react-native';
-import { globalStyles, images } from '../styles/global';
+import { StyleSheet, StatusBar, View, Button, Text, TouchableOpacity, FlatList, Image, Dimensions, Modal } from 'react-native';
+import { globalStyles, images, challenges } from '../styles/global';
 import Messages from './messages';
 import PostCard from '../shared/postCard';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -12,12 +11,16 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
 import SearchBox from './screenComponents/SearchBox';
+import Tag from './screenComponents/tag';
 import SearchContent from './screenComponents/SearchContent';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
+import SinglePost from './singlePost';
+// import { LinearGradient } from 'react-native-svg';
+// import LinearGradient from 'react-native-linear-gradient'
 
-export default function Home({ route }) {
+export default function Home({ navigation }) {
     const [reviews, setReviews] = useState([
         { title: 'barabarapalvin', number: 1, body: 'lorem ipsum', key: '1' },
         { title: 'bellathorne', number: 2, body: 'lorem ipsum', key: '2' },
@@ -26,19 +29,38 @@ export default function Home({ route }) {
         { title: 'mervetaskin', number: 5, body: 'lorem ipsum', key: '5' },
     ]);
 
+    const [challengeDatas, setChallenges] = useState([
+        { title: 'Lüks Moda', number: 1, body: 'lorem ipsum', key: '1' },
+        { title: 'Kırmızı Giysi', number: 2, body: 'lorem ipsum', key: '2' },
+        { title: 'Cosplay', number: 3, body: 'lorem ipsum', key: '3' },
+        { title: 'Sarışın', number: 4, body: 'lorem ipsum', key: '4' },
+        { title: 'Bikini', number: 5, body: 'lorem ipsum', key: '5' },
+        { title: 'Fit', number: 6, body: 'lorem ipsum', key: '6' },
+        { title: 'Doğada Poz', number: 7, body: 'lorem ipsum', key: '7' },
+        { title: 'Asansör', number: 8, body: 'lorem ipsum', key: '8' },
+        { title: 'Saç Boyama', number: 9, body: 'lorem ipsum', key: '9' },
+        { title: 'Tipleme', number: 10, body: 'lorem ipsum', key: '10' },
+        { title: 'Dövme', number: 11, body: 'lorem ipsum', key: '11' },
+    ]);
     // const categoryNumber = reviews.length;
 
     const [image, setImage] = useState(null);
 
     const getData = data => {
         setImage(data);
+        setPostOpen(true);
     };
 
+    const [postOpen, setPostOpen] = useState(false);
+
     const windowWidth = Dimensions.get('window').width;
-    const windoeHeight = Dimensions.get('window').height;
+    const windowHeight = Dimensions.get('window').height;
+
+    const statusBarStyle = "rgba(100,100,100,0.09)";
 
     return (
         // <View style={styles.container}>
+        //     <StatusBar backgroundColor="white" barStyle="dark-content" />
         //     {/* <FlatList numColumns={categoryNumber} data={reviews} style={{ paddingBottom: 10 }} renderItem={({ item }) => (
         //             <View style={{ marginLeft: 10, flexDirection: "row" }}>
         //                 <Image source={images.profilePhotos[item.number]} style={styles.categoryPhoto} />
@@ -107,17 +129,26 @@ export default function Home({ route }) {
                 width: '100%',
                 height: '100%',
                 backgroundColor: 'white',
-                position: 'relative',
+                // position: 'relative',
             }}>
-            <ScrollView horizontal={true} style={{ paddingVertical: 10 }}>
-                {reviews.map(item => (
-                    <View key={item.key} style={{ alignItems: "center", marginRight: 15, marginLeft: 5, paddingBottom: 25 }}>
-                        <Image source={images.profilePhotos[item.number]} style={styles.categoryPhoto} />
-                        <Text style={{ fontSize: 11, fontWeight: "400" }}>{item.title}</Text>
-                    </View>
-                ))}
-            </ScrollView>
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <StatusBar backgroundColor='black' barStyle="light-content" />
+            <View style={{}}>
+                <ScrollView horizontal={true} style={{ paddingVertical: 15, paddingHorizontal: 10, backgroundColor: "#141414", }}>
+                    {challengeDatas.map(item => (
+                        <View key={item.key} style={{ alignItems: "center", marginRight: 12, marginLeft: 5, paddingBottom: 0 }}>
+                            {/* <LinearGradient
+                                colors={['red', 'yellow']}
+                                style={styles.linearGradient}
+                            >
+                                <Text>Vertical Gradient</Text> */}
+                            <Image source={challenges.challengePhotos[item.number]} style={styles.categoryPhoto} />
+                            {/* </LinearGradient> */}
+                            <Text style={{ fontSize: 13, fontWeight: "600", paddingTop: 5, color: 'rgba(255,255,255,0.7)' }}>{item.title}</Text>
+                        </View>
+                    ))}
+                </ScrollView>
+            </View >
+            <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: 'black', }}>
                 {/* <SearchBox /> */}
                 <SearchContent data={getData} />
                 <TouchableOpacity
@@ -129,80 +160,44 @@ export default function Home({ route }) {
                     <AntDesign name="pluscircleo" style={{ fontSize: 40, opacity: 0.5 }} />
                 </TouchableOpacity>
             </ScrollView>
-            {image ? (
-                <View
-                    style={{
-                        position: 'absolute',
-                        zIndex: 1,
-                        width: '100%',
-                        height: '100%',
-                        backgroundColor: 'rgba(52,52,52,0.8)',
-                    }}>
-                    <StatusBar backgroundColor="#525252" barStyle="dark-content" />
-                    <View
-                        style={{
-                            position: 'absolute',
-                            top: windoeHeight / 6,
-                            left: windowWidth / 18,
-                            backgroundColor: 'white',
-                            width: '90%',
-                            height: 465,
-                            borderRadius: 15,
-                            zIndex: 1,
-                            elevation: 50,
-                        }}>
-                        <View
-                            style={{
-                                flexDirection: 'row',
-                                alignItems: 'center',
-                                paddingVertical: 10,
-                                paddingHorizontal: 15,
-                            }}>
-                            <Image
-                                source={image}
-                                style={{
-                                    width: 30,
-                                    height: 30,
-                                    borderRadius: 100,
-                                }}
-                            />
-                            <View style={{ paddingLeft: 8 }}>
-                                <Text style={{ fontSize: 12, fontWeight: '600' }}>
-                                    the_anonymous_guy
-                                </Text>
-                            </View>
-                        </View>
-                        <Image source={image} style={{ width: '100%', height: '80%' }} />
-                        <View
-                            style={{
-                                justifyContent: 'space-around',
-                                width: '100%',
-                                flexDirection: 'row',
-                                alignItems: 'center',
-                                padding: 8,
-                            }}>
-                            <Ionic name="ios-heart-outline" style={{ fontSize: 26 }} />
-                            <Ionic name="ios-person-circle-outline" style={{ fontSize: 26 }} />
-                            <Feather name="navigation" style={{ fontSize: 26 }} />
-                        </View>
-                    </View>
-                </View>
-            ) : null}
-        </View>
+            {/* {image ?
+                navigation.navigate('Medaillon',
+                    {
+                        navigation: navigation,
+                    }) : null} */}
+        </View >
     );
 }
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "black",
     },
     categories: {
         flexDirection: "row",
     },
+    gradient: {
+        width: 50,
+        height: 50,
+        borderRadius: '50%',
+        padding: 3,
+    },
+    linearGradient: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 5,
+        height: 200,
+        width: 350,
+    },
     categoryPhoto: {
         borderRadius: 50,
         width: 65,
+
         height: 65,
+        // marginLeft: 11,
+        borderWidth: 2.25,
+        borderColor: '#ff8501',
     },
     cardHeader: {
         flexDirection: 'row',
