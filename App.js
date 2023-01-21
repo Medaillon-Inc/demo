@@ -14,6 +14,8 @@ import Notifications from './screens/notifications';
 import HomeTabs from './tabs/HomeTabs';
 import Header from './shared/header';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import SinglePost from './screens/singlePost';
+import Comments from './screens/comments';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -50,6 +52,7 @@ export default function App() {
             headerTitleStyle: {
               fontSize: 35,
             },
+            headerShadowVisible: false
           }}
         >
           <Stack.Screen name="HomeTabs" component={HomeTabs} options={{ headerShown: false }} />
@@ -70,12 +73,21 @@ export default function App() {
             headerTitleStyle: { fontWeight: "600", }
           }} />
           <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerShown: false }} />
-        </Stack.Navigator>
+          <Stack.Screen name="SinglePost" component={SinglePost} options={{
+            headerShown: false,
+            // headerTitleStyle: { fontWeight: "600", fontSize: 22, }
+          }} />
+          <Stack.Screen name="Comments" component={Comments} options={{
+            title: 'Yorumlar',
+            headerTitleStyle: { fontWeight: "600", fontSize: 20, }
+            // headerTitleStyle: { fontWeight: "600", fontSize: 22, }
+          }} />
+        </Stack.Navigator >
         {/* <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeStackScreen} />
         <Tab.Screen name="Messages" component={MessagesStackScreen} />
       </Tab.Navigator> */}
-      </NavigationContainer>
-    </SafeAreaProvider>
+      </NavigationContainer >
+    </SafeAreaProvider >
   );
 }
