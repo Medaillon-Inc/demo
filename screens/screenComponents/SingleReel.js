@@ -5,8 +5,9 @@ import { Video, AVPlaybackStatus } from 'expo-av';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
+import { db, firebase } from '../../firebase'
 
-const SingleReel = ({ item, index, currentIndex, navigation }) => {
+const SingleReel = ({ item, index, currentIndex, post, navigation }) => {
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
 
@@ -23,24 +24,52 @@ const SingleReel = ({ item, index, currentIndex, navigation }) => {
 
     const [like, setLike] = useState(item.isLike);
 
+    const handleLike = post => {
+        setLike(!like)
+        const currentLikeStatus = !post.likes_by_users.includes(
+            firebase.auth().currentUser.email
+        )
+
+        db.collection('users')
+            .doc(post.owner_email)
+            .collection('posts')
+            .doc(post.id)
+            .update({
+                likes_by_users: currentLikeStatus
+                    ? firebase.firestore.FieldValue.arrayUnion(
+                        firebase.auth().currentUser.email
+                    )
+                    : firebase.firestore.FieldValue.arrayRemove(
+                        firebase.auth().currentUser.email
+                    ),
+            })
+            .then(() => {
+                console.log('Document successfully updated!')
+            })
+            .catch(error => {
+                console.error('Error updating document: ', error)
+            })
+    }
+
     return (
         <View
             style={{
                 width: windowWidth,
-                height: windowHeight,
+                // height: windowHeight,
+                height: windowHeight - 55,
                 position: 'relative',
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
             <TouchableOpacity
                 activeOpacity={0.9}
-                onPress={() => setMute(!mute)}
+                // onPress={() => setMute(!mute)}
                 style={{
                     width: '100%',
                     height: '100%',
                     position: 'absolute',
                 }}>
-                <Video
+                {/* <Video
                     videoRef={videoRef}
                     onBuffer={onBuffer}
                     onError={onError}
@@ -54,7 +83,10 @@ const SingleReel = ({ item, index, currentIndex, navigation }) => {
                         height: '100%',
                         position: 'absolute',
                     }}
-                />
+                /> */}
+                <Image
+                    source={{ uri: post.imageUrl }}
+                    style={{ height: '100%', width: '100%', resizeMode: 'cover' }} />
             </TouchableOpacity>
             <Ionic
                 name="volume-mute"
@@ -73,12 +105,14 @@ const SingleReel = ({ item, index, currentIndex, navigation }) => {
                     width: windowWidth,
                     zIndex: 1,
                     bottom: 0, //edited
-                    padding: 10,
+                    paddingLeft: 10,
+                    paddingBottom: 10,
+                    marginBottom: 55,
                 }}>
                 <View style={{}}>
                     <TouchableOpacity style={{ width: 150 }}>
                         <View
-                            style={{ width: 100, flexDirection: 'row', alignItems: 'center' }}>
+                            style={{ width: 250, flexDirection: 'row', alignItems: 'center' }}>
                             <View
                                 style={{
                                     width: 32,
@@ -88,7 +122,8 @@ const SingleReel = ({ item, index, currentIndex, navigation }) => {
                                     margin: 10,
                                 }}>
                                 <Image
-                                    source={item.postProfile}
+                                    // source={item.postProfile}
+                                    source={{ uri: post.profile_picture }}
                                     style={{
                                         width: '100%',
                                         height: '100%',
@@ -97,19 +132,21 @@ const SingleReel = ({ item, index, currentIndex, navigation }) => {
                                     }}
                                 />
                             </View>
-                            <Text style={{ color: 'white', fontSize: 16 }}>{item.title}</Text>
+                            {/* <Text style={{ color: 'white', fontSize: 16 }}>{item.title}</Text> */}
+                            <Text style={{ fontWeight: '600', color: 'white' }}>@{post.user}</Text>
                         </View>
                     </TouchableOpacity>
                     <Text style={{ color: 'white', fontSize: 14, marginHorizontal: 10 }}>
-                        {item.description}
+                        {/* {item.description} */}
+                        <Text> {post.caption}</Text>
                     </Text>
-                    <View style={{ flexDirection: 'row', padding: 10 }}>
+                    {/* <View style={{ flexDirection: 'row', padding: 10 }}>
                         <Ionic
                             name="ios-musical-note"
                             style={{ color: 'white', fontSize: 16 }}
                         />
                         <Text style={{ color: 'white' }}>Original Audio</Text>
-                    </View>
+                    </View> */}
                 </View>
             </View>
             <View
@@ -118,12 +155,26 @@ const SingleReel = ({ item, index, currentIndex, navigation }) => {
                     bottom: 10, //edited
                     right: 0,
                 }}>
-                <TouchableOpacity onPress={() => setLike(!like)} style={{ padding: 10 }}>
-                    <AntDesign
+                <TouchableOpacity onPress={() => handleLike(post)} style={{ padding: 10 }}>
+                    {post.likes_by_users.includes(firebase.auth().currentUser.email)
+                        ? <AntDesign
+                            name="heart"
+                            style={{ color: 'red', fontSize: 25 }}
+                        />
+                        : <AntDesign
+                            name='hearto'
+                            style={{ color: 'white', fontSize: 25 }}
+                        />
+                    }
+                    {/* <AntDesign
                         name={like ? 'heart' : 'hearto'}
                         style={{ color: like ? 'red' : 'white', fontSize: 25 }}
-                    />
-                    <Text style={{ color: 'white' }}>{item.likes}</Text>
+                    /> */}
+                    {/* <Text style={{ color: 'white' }}>{item.likes}</Text> */}
+                    {post.likes_by_users.length > 0
+                        ? <Text style={{ color: 'white', alignSelf: 'center' }}>{post.likes_by_users.length.toLocaleString('en')} </Text>
+                        : null
+                    }
                 </TouchableOpacity>
                 <TouchableOpacity style={{ padding: 10 }} onPress={() => navigation.navigate('Comments')} >
                     <Ionic

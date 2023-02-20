@@ -18,7 +18,8 @@ import Ionic from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import SinglePost from './singlePost';
 // import { LinearGradient } from 'react-native-svg';
-// import LinearGradient from 'react-native-linear-gradient'
+import { LinearGradient } from 'expo-linear-gradient';
+
 
 export default function Home({ navigation }) {
     const [reviews, setReviews] = useState([
@@ -136,13 +137,16 @@ export default function Home({ navigation }) {
                 <ScrollView horizontal={true} style={{ paddingVertical: 15, paddingHorizontal: 10, backgroundColor: "#141414", }}>
                     {challengeDatas.map(item => (
                         <View key={item.key} style={{ alignItems: "center", marginRight: 12, marginLeft: 5, paddingBottom: 0 }}>
-                            {/* <LinearGradient
-                                colors={['red', 'yellow']}
-                                style={styles.linearGradient}
-                            >
-                                <Text>Vertical Gradient</Text> */}
-                            <Image source={challenges.challengePhotos[item.number]} style={styles.categoryPhoto} />
-                            {/* </LinearGradient> */}
+                            <LinearGradient
+                                // colors={['#c71c41', '#c7308f', '#ff8501']}
+                                colors={['#fc03ec', '#a103fc', '#2883fa']}
+                                locations={[0.1, 0.4, 1]}
+                                start={{ x: 1, y: 0.5 }}
+                                end={{ x: 0.2, y: 1 }}
+                                style={styles.storyCircle}>
+                                <Image source={challenges.challengePhotos[item.number]} style={styles.categoryPhoto} />
+
+                            </LinearGradient>
                             <Text style={{ fontSize: 13, fontWeight: "600", paddingTop: 5, color: 'rgba(255,255,255,0.7)' }}>{item.title}</Text>
                         </View>
                     ))}
@@ -177,18 +181,8 @@ export const styles = StyleSheet.create({
     categories: {
         flexDirection: "row",
     },
-    gradient: {
-        width: 50,
-        height: 50,
-        borderRadius: '50%',
-        padding: 3,
-    },
-    linearGradient: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 5,
-        height: 200,
-        width: 350,
+    storyCircle: {
+        borderRadius: 50,
     },
     categoryPhoto: {
         borderRadius: 50,
@@ -196,8 +190,11 @@ export const styles = StyleSheet.create({
 
         height: 65,
         // marginLeft: 11,
-        borderWidth: 2.25,
-        borderColor: '#ff8501',
+        // borderWidth: 2.25,
+        borderWidth: 3,
+        // borderColor: '#ff8501',
+        borderColor: 'white',
+        margin: 3
     },
     cardHeader: {
         flexDirection: 'row',

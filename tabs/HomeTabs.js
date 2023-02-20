@@ -64,13 +64,13 @@ export default function HomeTabs({ navigation }) {
                         if (focused) {
                             return <Foundation name="home" size={30} color="white" />
                         } else {
-                            return <Octicons name="home" size={24} color="white" />
+                            return <Octicons name="home" size={24} color="black" />
                         }
                     } else if (route.name === 'Search') {
                         if (focused) {
                             return <FontAwesome name="search" size={size} color="white" />
                         } else {
-                            return <Feather name="search" size={size} color="white" />
+                            return <Feather name="search" size={size} color="black" />
                         }
                     } else if (route.name === 'Shop') {
                         if (focused) {
@@ -113,7 +113,7 @@ export default function HomeTabs({ navigation }) {
                             // size = size + 6;
                             return (
                                 // <FontAwesome name="user" size={24} color="black" />
-                                <FontAwesome5 name="user-alt" size={24} color="white" />
+                                <FontAwesome5 name="user-alt" size={24} color="black" />
                             );
                         }
                         return (

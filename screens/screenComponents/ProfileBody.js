@@ -72,7 +72,7 @@ export const ProfileBody = ({
                         alignItems: 'center',
                     }}>
                     <Image
-                        source={profileImage}
+                        source={{ uri: profileImage }}
                         style={{
                             resizeMode: 'cover',
                             width: 80,

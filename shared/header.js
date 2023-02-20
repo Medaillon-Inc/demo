@@ -10,6 +10,16 @@ import { globalStyles } from '../styles/global';
 import { useFonts } from 'expo-font';
 // import { useNavigation } from '@react-navigation/native';
 
+
+const handleSignOut = async () => {
+    try {
+        await firebase.auth().signOut()
+        console.log('Signed out successfully!')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export default function Header({ navigation, title, navigating }) {
     // const navigator = useNavigation();
 
@@ -28,7 +38,9 @@ export default function Header({ navigation, title, navigating }) {
     return (
         <View style={styles.header}>
             <View style={styles.leftSide}>
-                <Text style={styles.headerTitleStyle}>{title}</Text>
+                <TouchableOpacity onPress={handleSignOut}>
+                    <Text style={styles.headerTitleStyle}>{title}</Text>
+                </TouchableOpacity>
             </View>
             <View style={styles.icons}>
                 {/* <TouchableOpacity onPress={() => navigation.navigate('Messages')}>

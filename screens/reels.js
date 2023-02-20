@@ -8,4 +8,5 @@ export default function Reels({ navigation, route }) {
             <Text>Reels Sayfası Yapım Aşamasında</Text>
         </View>
     );
+
 }

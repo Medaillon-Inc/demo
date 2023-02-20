@@ -96,11 +96,12 @@
 
 
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, StatusBar } from 'react-native';
 import { ProfileBody, ProfileButtons } from './screenComponents/ProfileBody';
 import Entypo from 'react-native-vector-icons/Entypo';
 import BottomTabView from './screenComponents/BottomTabView';
+import { db, firebase } from '../firebase'
 
 
 const statusBarStyle = "white"
@@ -141,27 +142,57 @@ const Profile = () => {
         );
     }
 
+    const [currentLoggedInUser, setCurrentLoggedInUser] = useState(null)
+
+    const getUsername = () => {
+        const user = firebase.auth().currentUser
+        const unsubscribe = db
+            .collection('users')
+            .where('owner_uid', '==', user.uid)
+            .limit(1)
+            .onSnapshot(
+                snapshot => snapshot.docs.map(doc => {
+                    setCurrentLoggedInUser({
+                        username: doc.data().username,
+                        profilePicture: doc.data().profile_picture,
+                    });
+                })
+            );
+        // console.log("Current logged in user: " + currentLoggedInUser)
+        return unsubscribe
+    }
+
+    useEffect(() => {
+        getUsername()
+    }, [])
+
+    let pf = currentLoggedInUser.profileImage
+
     return (
         <View style={{ width: '100%', height: '100%', backgroundColor: 'white' }}>
             <StatusBar backgroundColor={statusBarStyle} barStyle="dark-content" />
             <View style={{ width: '100%', padding: 8 }}>
                 <ProfileBody
-                    name="andreas_sparre"
-                    accountName="mr_peobody"
-                    profileImage={require('../storage/images/userProfile.png')}
+                    name={currentLoggedInUser.username}
+                    accountName={currentLoggedInUser.getUsername}
+                    // profileImage={require('../storage/images/userProfile.png')}
+                    // profileImage="https://randomuser.me/api/portraits/men/54.jpg"
+                    profileImage={pf}
                     followers="3.6M"
                     following="35"
                     post="458"
                 />
                 <ProfileButtons
                     id={0}
-                    name="Mr Peobody"
-                    accountName="mr_peobody"
-                    profileImage={require('../storage/images/userProfile.png')}
+                    name={currentLoggedInUser.username}
+                    accountName={currentLoggedInUser.username}
+                    // profileImage={require('../storage/images/userProfile.png')}
+                    profileImage="https://randomuser.me/api/portraits/men/54.jpg"
 
                 />
             </View>
             <View>
+                {/* <Text style={{ color: 'black', fontSize: 22, fontWeight: "600" }}>asdads {currentLoggedInUser.profileImage}</Text> */}
                 <Text
                     style={{
                         padding: 10,

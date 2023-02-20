@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Modal, Pressable } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -12,8 +12,35 @@ import Feather from 'react-native-vector-icons/Feather';
 import { withOrientation } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
+import { db, firebase } from '../firebase'
 
 export default function ProfileHeader({ navigation, title, name, accountName, profileImage }) {
+
+    const [currentLoggedInUser, setCurrentLoggedInUser] = useState(null)
+
+    const getUsername = () => {
+        const user = firebase.auth().currentUser
+        const unsubscribe = db
+            .collection('users')
+            .where('owner_uid', '==', user.uid)
+            .limit(1)
+            .onSnapshot(
+                snapshot => snapshot.docs.map(doc => {
+                    setCurrentLoggedInUser({
+                        username: doc.data().username,
+                        profilePicture: doc.data().profile_picture,
+                    });
+                })
+            );
+        // console.log("Current logged in user: " + currentLoggedInUser)
+        return unsubscribe
+    }
+
+    useEffect(() => {
+        getUsername()
+    }, [])
+
+
     // const navigator = useNavigation();
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -120,11 +147,12 @@ export default function ProfileHeader({ navigation, title, name, accountName, pr
 
 
             <View style={styles.leftSide}>
-                <Text style={styles.headerTitleStyle}>{title}</Text>
+                {/* <Text style={styles.headerTitleStyle}>asd</Text> */}
+                <Text style={styles.headerTitleStyle}>{currentLoggedInUser.username}</Text>
                 <SimpleLineIcons style={{ paddingLeft: 10, paddingTop: 10, }} name="arrow-down" size={10} color="black" />
             </View>
             <View style={styles.rightSide}>
-                <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
+                <TouchableOpacity onPress={() => navigation.push('NewPostScreen')}>
                     <Feather style={styles.icon} name="plus-square" size={29} color="black" />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setModalOpen(true)}>
