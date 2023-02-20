@@ -16,78 +16,63 @@ import Header from './shared/header';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SinglePost from './screens/singlePost';
 import Comments from './screens/comments';
+import LoginScreen from './screens/LoginScreen';
+import AuthNavigation from './AuthNavigation';
+// import { Pusher, PusherMember, PusherChannel, PusherEvent, } from '@pusher/pusher-websocket-react-native';
 
-SplashScreen.preventAutoHideAsync();
+// const pusher = Pusher.getInstance();
 
-const Stack = createNativeStackNavigator();
+// await pusher.init({
+//   apiKey: "ddc4800fa51045fdfa81",
+//   cluster: "eu"
+// });
+
+// await pusher.connect();
+// await pusher.subscribe({
+//   channelName: "medaillonDemoV0.0.1",
+//   onEvent: (event) => {
+//     console.log('Event received:' + event);
+//   }
+//   // onEvent: (event: PusherEvent) => {
+//   //     console.log(`Event received: ${event}`);
+//   // }
+// });
+
+// SplashScreen.preventAutoHideAsync();
+
+// const Stack = createNativeStackNavigator();
 // const Tab = createBottomTabNavigator();
 
 export default function App() {
 
-  const [fontsLoaded] = useFonts({
-    'Billabong': require('./assets/fonts/Billabong.ttf'),
-  });
+  // const [fontsLoaded] = useFonts({
+  //   'Billabong': require('./assets/fonts/Billabong.ttf'),
+  // });
 
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
+  // const onLayoutRootView = useCallback(async () => {
+  //   if (fontsLoaded) {
+  //     await SplashScreen.hideAsync();
+  //   }
+  // }, [fontsLoaded]);
 
-  if (!fontsLoaded) {
-    return (
-      <Text>Fontlar yüklenemedi</Text>
-    )
-  }
+  // if (!fontsLoaded) {
+  //   return (
+  //     <Text>Fontlar yüklenemedi</Text>
+  //   )
+  // }
+
+  // const screenOptions = {
+  //   // headerStyle: 
+  //   //   backgroundColor: '#f4511e',
+  //   // },
+  //   headerTintColor: '#333',
+  //   headerTitleStyle: {
+  //     fontSize: 35,
+  //   },
+  //   headerShadowVisible: false,
+  // }
 
   return (
-    <SafeAreaProvider>
-      <NavigationContainer onReady={onLayoutRootView}>
-        <Stack.Navigator
-          screenOptions={{
-            // headerStyle: {
-            //   backgroundColor: '#f4511e',
-            // },
-            headerTintColor: '#333',
-            headerTitleStyle: {
-              fontSize: 35,
-            },
-            headerShadowVisible: false
-          }}
-        >
-          <Stack.Screen name="HomeTabs" component={HomeTabs} options={{ headerShown: false }} />
-          <Stack.Screen name="Search" component={Search} options={{
-            // title: 'Ara', headerShadowVisible: false, headerTitleStyle: {
-            //   fontWeight: 'bold',
-            // },
-            headerTitle: () => <Header title='Ara' />
-          }} />
-          <Stack.Screen name="Medaillon" component={Medaillon} options={{
-            title: 'Yarışmalar', headerTitleStyle: {
-              width: 0, height: 0,
-              fontFamily: 'Billabong',
-            },
-          }} />
-          <Stack.Screen name="Notifications" component={Notifications} options={{
-            title: 'Bildirimler',
-            headerTitleStyle: { fontWeight: "600", }
-          }} />
-          <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerShown: false }} />
-          <Stack.Screen name="SinglePost" component={SinglePost} options={{
-            headerShown: false,
-            // headerTitleStyle: { fontWeight: "600", fontSize: 22, }
-          }} />
-          <Stack.Screen name="Comments" component={Comments} options={{
-            title: 'Yorumlar',
-            headerTitleStyle: { fontWeight: "600", fontSize: 20, }
-            // headerTitleStyle: { fontWeight: "600", fontSize: 22, }
-          }} />
-        </Stack.Navigator >
-        {/* <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeStackScreen} />
-        <Tab.Screen name="Messages" component={MessagesStackScreen} />
-      </Tab.Navigator> */}
-      </NavigationContainer >
-    </SafeAreaProvider >
+    <AuthNavigation/>
   );
 }
