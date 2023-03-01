@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "react-native-js-try",
-    "slug": "react-native-js-try",
+    "name": "medaillon",
+    "slug": "medaillon-demo",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/medaillon_logo - big - transparent.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/medaillon_logo - big - circle - splash.png",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -18,17 +18,20 @@
     "ios": {
       "supportsTablet": true
     },
-    "androidNavigationBar": {
-      "visible": false
-    },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/medaillon_logo - big - app.png",
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/medaillon_logo - big - circle.png"
-    }
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6e4d0932-c4e1-43ce-b9a2-5a3c45631f5c"
+      }
+    },
+    "owner": "mehmeteren"
   }
 }
