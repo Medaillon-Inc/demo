@@ -39,6 +39,7 @@ const screenOptions = {
         fontSize: 35,
     },
     headerShadowVisible: false,
+    headerShown: false,
     gestureEnabled: true,
 }
 
@@ -68,7 +69,7 @@ export const SignedInStack = () => {
                     initialRouteName='LoginScreen'
                     screenOptions={screenOptions}
                 >
-                    <Stack.Screen name="HomeTabs" component={HomeTabs} options={{ headerShown: false }} />
+                    <Stack.Screen name="HomeTabs" component={HomeTabs} />
                     <Stack.Screen name="Search" component={Search} options={{
                         // title: 'Ara', headerShadowVisible: false, headerTitleStyle: {
                         //   fontWeight: 'bold',
@@ -85,17 +86,14 @@ export const SignedInStack = () => {
                         title: 'Bildirimler',
                         headerTitleStyle: { fontWeight: "600", }
                     }} />
-                    <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerShown: false }} />
-                    <Stack.Screen name="SinglePost" component={SinglePost} options={{
-                        headerShown: false,
-                        // headerTitleStyle: { fontWeight: "600", fontSize: 22, }
-                    }} />
+                    <Stack.Screen name="EditProfile" component={EditProfile} />
+                    <Stack.Screen name="SinglePost" component={SinglePost} />
                     <Stack.Screen name="Comments" component={Comments} options={{
                         title: 'Yorumlar',
                         headerTitleStyle: { fontWeight: "600", fontSize: 20, }
                         // headerTitleStyle: { fontWeight: "600", fontSize: 22, }
                     }} />
-                    <Stack.Screen name='NewPostScreen' component={NewPostScreen} options={{ headerShown: false }} />
+                    <Stack.Screen name='NewPostScreen' component={NewPostScreen} />
                 </Stack.Navigator >
                 {/* <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeStackScreen} />
@@ -129,8 +127,8 @@ export const SignedOutStack = () => {
                 initialRouteName='LoginScreen'
                 screenOptions={screenOptions}
             >
-                <Stack.Screen name='LoginScreen' component={LoginScreen} options={{ headerShown: false }} />
-                <Stack.Screen name='SignupScreen' component={SignupScreen} options={{ headerShown: false }} />
+                <Stack.Screen name='LoginScreen' component={LoginScreen} />
+                <Stack.Screen name='SignupScreen' component={SignupScreen}/>
             </Stack.Navigator>
         </NavigationContainer>
     )

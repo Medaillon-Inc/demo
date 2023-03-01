@@ -46,6 +46,7 @@ export default function HomeTabs({ navigation }) {
                     elevation: 0,
                     justifyContent: 'center',
                     alignItems: 'center',
+                    gestureEnabled: true,
                 },
                 tabBarIcon: ({ focused, color, size }) => {
 
@@ -82,12 +83,12 @@ export default function HomeTabs({ navigation }) {
                         if (focused) {
                             return <Image
                                 style={{ width: 47, height: 47 }}
-                                source={require('../assets/medaillon_logo - big - transparent.png')}
+                                source={require('../assets/medaillon_logo-big-transparent.png')}
                             />
                         } else {
                             return <Image
                                 style={{ width: 35, height: 35 }}
-                                source={require('../assets/medaillon_logo - big - transparent.png')}
+                                source={require('../assets/medaillon_logo-big-transparent.png')}
                             />
                         }
                     } else if (route.name === 'Profile') {
@@ -134,12 +135,14 @@ export default function HomeTabs({ navigation }) {
                 // headerRight: () => <Header title='Medaillon' navigation={navigation} />,
                 header: () => <Header title='Medaillon' navigation={navigation} />,
                 tabBarStyle: { backgroundColor: "white", paddingVertical: 5, },
+                gestureEnabled: true,
             }} />
             {/* <HomeTab.Screen name="Search" component={Search} options={{
                 title: 'Ara',
             }} /> */}
             <HomeTab.Screen name="Shop" component={Shop} options={{
                 title: 'Shop',
+                gestureEnabled: true,
             }} />
             <HomeTab.Screen name="Medaillon" component={Medaillon} navgation={navigation} options={({ route }) => ({
                 tabBarShowLabel: false,
@@ -154,6 +157,7 @@ export default function HomeTabs({ navigation }) {
                 // backgroundColor: 'rgba(52, 52, 52, 0.8)',
                 tabBarStyle: { backgroundColor: "white", paddingVertical: 5, },
                 header: () => <ReelsTopHeader title='andreas_sparre' />,
+                gestureEnabled: true,
                 // tabBarBadge: 3
             })} />
             <HomeTab.Screen name="Messages" component={Messages} options={{
@@ -172,6 +176,7 @@ export default function HomeTabs({ navigation }) {
                     accountName="andreas_sparre"
                     profileImage={require('../storage/images/userProfile.png')}
                 />,
+                gestureEnabled: true,
             }} />
             {/* <HomeTab.Screen name="SinglePost" component={SinglePost} options={{
                 headerTitleStyle: { fontWeight: "600", fontSize: 22, }
