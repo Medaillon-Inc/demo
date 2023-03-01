@@ -5,11 +5,11 @@ import PostCard from '../shared/postCard';
 
 export default function Notifications({ navigation, route }) {
     const [notifications, setNitfication] = useState([
-        { name: 'Ali Türker', address: 'altrkr06', info: ' mesajını beğendi.', date: 'Bu Hafta', time: '5g', number: 1, body: 'lorem ipsum', key: '1' },
-        { name: 'Louis Vitton', address: 'louisvitton', info: ' gönderini beğendi.', date: 'Bu Hafta', time: '2g', number: 2, body: 'lorem ipsum', key: '2' },
+        { name: 'Ali Türker', address: 'altrkr06', info: ' mesajını beğendi', date: 'Bu Hafta', time: '5g', number: 1, body: 'lorem ipsum', key: '1' },
+        { name: 'Louis Vitton', address: 'louisvitton', info: ' gönderine yorum yazdı', date: 'Bu Hafta', time: '2g', number: 2, body: 'lorem ipsum', key: '2' },
         // { name: 'Gizem Yılmaz', address: 'gzemyilmaz', info: ' gönderini beğendi.', date: 'Bu Hafta', time: '2g', number: 2, body: 'lorem ipsum', key: '2' },
-        { name: 'Mete', address: 'motun', info: ' sana mesaj attı.', date: 'Bugün', time: 'az önce', number: 3, body: 'lorem ipsum', key: '3' },
-        { name: 'Gucci', address: 'gucci', info: ' 4 yeni fotoğraf paylaştı.', date: 'Bugün', time: '21s', number: 4, body: 'lorem ipsum', key: '4' },
+        { name: 'Mete', address: 'motun', info: ' sana yeni mesaj attı.', date: 'Bugün', time: 'az önce', number: 3, body: 'lorem ipsum', key: '3' },
+        { name: 'Gucci', address: 'gucci', info: ' 4 yeni fotoğraf paylaştı..', date: 'Bugün', time: '21s', number: 4, body: 'lorem ipsum', key: '4' },
         { name: 'Gizem Yılmaz', address: 'gzmyilmaz', number: 5, info: ' yeni fotoğraf paylaştı.', date: 'Bugün', time: '15g', body: 'lorem ipsum', key: '5' },
     ]);
 
@@ -21,14 +21,20 @@ export default function Notifications({ navigation, route }) {
                     <PostCard>
                         <View style={styles.cardHeader}>
                             <Image source={notificationData.profilePhotos[item.number]} style={styles.profilephoto} />
-                            <View style={{ justifyContent: 'flex-start', flexDirection: 'row', paddingHorizontal: 1 }}>
+                            <View style={{ alignItems: 'center', flexDirection: 'row', }}>
+                                <Text style={styles.username}>{item.address}</Text>
+                                <Text>
+                                    {item.info.length > 27
+                                        ? item.info.slice(0, 27).toLowerCase() + '...'
+                                        : item.info.toLowerCase()
+                                    }
+                                    {/* {item.info} */}
+                                </Text>
+                            </View>
+                            <View style={{ justifyContent: 'flex-end', flexDirection: 'row', paddingEnd: 10, flex: 1, }}>
                                 <View style={{ borderRadius: 10, backgroundColor: ' rgba(230, 88, 41, 1)', }}>
                                     <Text style={styles.notificationTime}> {item.time} </Text>
                                 </View>
-                            </View>
-                            <View style={{ alignItems: 'center', flexDirection: 'row' }}>
-                                <Text style={styles.username}>{item.name}</Text>
-                                <Text>{item.info}</Text>
                             </View>
                         </View>
                     </PostCard>
@@ -68,10 +74,12 @@ export const styles = StyleSheet.create({
         paddingVertical: 5,
     },
     cardHeader: {
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         paddingBottom: 10,
         paddingLeft: 10,
+        alignContent: "space-between",
     },
     profilephoto: {
         borderRadius: 50,

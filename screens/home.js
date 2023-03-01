@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { FlatList, Image, View, Dimensions, StatusBar, StyleSheet, Text } from 'react-native';
+import { FlatList, Image, View, Dimensions, StatusBar, StyleSheet, Text, TouchableOpacity, SafeAreaView, } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { NativeBaseConfigProvider } from 'native-base';
 import { LinearGradient } from 'expo-linear-gradient';
 import { challenges, logos } from '../styles/global';
 import PortfolioImageTag from './screenComponents/PortfolioImageTag';
 import * as Animatable from 'react-native-animatable';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+
 
 export default function Home() {
 
@@ -101,55 +103,69 @@ export default function Home() {
     ];
 
     return (
-        <>
-            <StatusBar backgroundColor='black' barStyle="light-content" />
-            <View style={{}}>
-                {/* <ScrollView horizontal={true} style={{ paddingVertical: 15, paddingHorizontal: 10, backgroundColor: "#141414", }}> */}
-                <ScrollView horizontal={true} style={{ paddingVertical: 15, paddingHorizontal: 10, }}>
-                    {challengeDatas.map(item => (
-                        <View key={item.key} style={{ alignItems: "center", marginRight: 12, marginLeft: 5, paddingBottom: 0 }}>
-                            <LinearGradient
-                                // colors={['#c71c41', '#c7308f', '#']}
-                                // colors={['#fc03ec', '#a103fc', '#2883fa']}
-                                colors={['#fc03ec', '#ff8501', '#2883fa']}
-                                locations={[0.1, 0.4, 1]}
-                                start={{ x: 1, y: 0.5 }}
-                                end={{ x: 0.2, y: 1 }}
-                                style={styles.storyCircle}>
-                                <Image source={challenges.challengePhotos[item.number]} style={styles.categoryPhoto} />
+        <SafeAreaView>
+            <StatusBar backgroundColor='white' barStyle="dark-content" />
+            <ScrollView horizontal={false}>
+                <View style={{ flexDirection: 'row', position: "relative", }}>
+                    {/* <ScrollView horizontal={true} style={{ paddingVertical: 15, paddingHorizontal: 10, backgroundColor: "#141414", }}> */}
+                    <ScrollView horizontal={true} style={{ paddingVertical: 15, paddingHorizontal: 10, }}>
+                        {/* {mRight = item.key == 10 ? 5 : 12} */}
+                        {challengeDatas.map(item => (
+                            <View key={item.key} style={{ alignItems: "center", marginRight: item.key == 10 ? 0 : 12, marginLeft: 5, paddingBottom: 0, }}>
+                                <LinearGradient
+                                    // colors={['#c71c41', '#c7308f', '#']}
+                                    // colors={['#fc03ec', '#a103fc', '#2883fa']}
+                                    colors={['#fc03ec', '#ff8501', '#2883fa']}
+                                    locations={[0.1, 0.4, 1]}
+                                    start={{ x: 1, y: 0.5 }}
+                                    end={{ x: 0.2, y: 1 }}
+                                    style={styles.storyCircle}>
+                                    <Image source={challenges.challengePhotos[item.number]} style={styles.categoryPhoto} />
 
-                            </LinearGradient>
-                            {/* <Text style={{ fontSize: 13, fontWeight: "600", paddingTop: 5, color: 'rgba(255,255,255,0.7)' }}>{item.title}</Text> */}
-                            <Text style={{ fontSize: 13, fontWeight: "500", paddingTop: 5, }}>{item.title}</Text>
-                        </View>
-                    ))}
-                </ScrollView>
-            </View >
-            <FlatList
-                horizontal={false}
-                numColumns={3}
-                data={exploreImages}
-                keyExtractor={item => item.id}
-                renderItem={({ item }) =>
-                    <Animatable.View
-                        style={{ flex: 1, alignItems: 'center' }}
-                        animation="zoomIn"
-                        delay={item.id * 200}
-                        useNativeDriver={true}
-                    >
-                        <Image
-                            source={item.image}
+                                </LinearGradient>
+                                {/* <Text style={{ fontSize: 13, fontWeight: "600", paddingTop: 5, color: 'rgba(255,255,255,0.7)' }}>{item.title}</Text> */}
+                                <Text style={{ fontSize: 13, fontWeight: "500", paddingTop: 5, }}>{item.title}</Text>
+                            </View>
+                        ))}
+                        <TouchableOpacity
                             style={{
-                                height: screenWidth / 2,
-                                width: screenWidth / 3,
-                            }}
-                        />
-                        <PortfolioImageTag tag={item.tag} icon={item.icon} />
-                    </Animatable.View>
-                }
-            />
-        </>
-
+                                marginBottom: 25,
+                                marginTop: 5,
+                                marginLeft: 20,
+                                marginRight: 25,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                            }}>
+                            <AntDesign name="pluscircleo" style={{ fontSize: 40, opacity: 0.5, }} />
+                        </TouchableOpacity>
+                    </ScrollView>
+                </View >
+                <FlatList
+                    // style={{ position: "absolute", top: 200, zIndex: 11 }}
+                    horizontal={false}
+                    numColumns={3}
+                    data={exploreImages}
+                    keyExtractor={item => item.id}
+                    renderItem={({ item }) =>
+                        <Animatable.View
+                            style={{ flex: 1, alignItems: 'center' }}
+                            animation="zoomIn"
+                            delay={item.id * 200}
+                            useNativeDriver={true}
+                        >
+                            <Image
+                                source={item.image}
+                                style={{
+                                    height: screenWidth / 2,
+                                    width: screenWidth / 3,
+                                }}
+                            />
+                            <PortfolioImageTag tag={item.tag} icon={item.icon} />
+                        </Animatable.View>
+                    }
+                />
+            </ScrollView>
+        </SafeAreaView>
     );
 }
 
