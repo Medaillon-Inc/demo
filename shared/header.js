@@ -8,6 +8,7 @@ import { Feather } from '@expo/vector-icons';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { globalStyles } from '../styles/global';
 import { useFonts } from 'expo-font';
+import { firebase } from '../firebase'
 // import { useNavigation } from '@react-navigation/native';
 
 
@@ -48,10 +49,12 @@ export default function Header({ navigation, title, navigating }) {
                 </TouchableOpacity> */}
                 <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
                     {/* <FontAwesome style={styles.icon} name="heart-o" size={24} color="black" /> */}
-                    <Feather name="search" size={25} color="color: 'rgba(255,255,255,0.7)'" style={{ paddingLeft: 10 }} />
+                    {/* <Feather name="search" size={25} color="color: 'rgba(255,255,255,0.7)'" style={{ paddingLeft: 10 }} /> */}
+                    <Feather name="search" size={25} color="black" style={{ paddingLeft: 10 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
-                    <Ionicons style={styles.icon} name="md-notifications-outline" size={28} color="color: 'rgba(255,255,255,0.7)'" />
+                    {/* <Ionicons style={styles.icon} name="md-notifications-outline" size={28} color="color: 'rgba(255,255,255,0.7)'" /> */}
+                    <Ionicons style={styles.icon} name="md-notifications-outline" size={28} color="black" />
                     {/* <SimpleLineIcons style={styles.icon} name="menu" size={24} color="white" /> */}
                 </TouchableOpacity>
                 {/* <TouchableOpacity onPress={() => navigation.navigate('Messages')}>
@@ -76,7 +79,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingTop: 0,
-        backgroundColor: '#141414'
+        backgroundColor: '#fff'
+        // backgroundColor: '#141414'
         // justifyContent: 'center',
     },
     leftSide: {
@@ -91,7 +95,7 @@ const styles = StyleSheet.create({
         paddingTop: 17,
         fontFamily: 'Billabong',
         fontSize: 30,
-        color: 'rgba(255,255,255,0.7)'
+        // color: 'rgba(255,255,255,0.7)'
     },
     // headerText: {
     //     fontFamily: 'Billabong',

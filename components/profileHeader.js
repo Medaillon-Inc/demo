@@ -148,7 +148,7 @@ export default function ProfileHeader({ navigation, title, name, accountName, pr
 
             <View style={styles.leftSide}>
                 {/* <Text style={styles.headerTitleStyle}>asd</Text> */}
-                <Text style={styles.headerTitleStyle}>{currentLoggedInUser.username}</Text>
+                <Text style={styles.headerTitleStyle}>Haute Le Mode</Text>
                 <SimpleLineIcons style={{ paddingLeft: 10, paddingTop: 10, }} name="arrow-down" size={10} color="black" />
             </View>
             <View style={styles.rightSide}>

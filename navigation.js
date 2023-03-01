@@ -19,6 +19,7 @@ import HomeTabs from './tabs/HomeTabs';
 import Header from './shared/header';
 import SinglePost from './screens/singlePost';
 import Comments from './screens/comments';
+import { NativeBaseConfigProvider } from 'native-base';
 
 
 // SplashScreen.preventAutoHideAsync();

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { videoData } from './Database';
+import PortfolioImageTag from './PortfolioImageTag';
 
 
 const SearchContent = props => {
@@ -8,18 +9,18 @@ const SearchContent = props => {
         {
             id: 0,
             images: [
-                require('../../storage/images/adrianalima.png'),
+                require('../../storage/images/kratos.png'),
                 require('../../storage/images/hadid1.jpg'),
                 require('../../storage/images/palvin2.jpg'),
                 require('../../storage/images/barbarapalvin.png'),
                 require('../../storage/images/hadid2.jpg'),
-                require('../../storage/images/fawn1.jpg'),
+                require('../../storage/images/scarletwitch.jpg'),
             ],
         },
         {
             id: 1,
             images: [
-                require('../../storage/images/lima2.jpg'),
+                require('../../assets/challengePhotos/highfashion1.jpg'),
                 require('../../storage/images/jenner1.jpg'),
                 require('../../storage/images/bananarepublic1.jpg'),
                 require('../../storage/images/bananarepublic2.jpg'),
@@ -30,9 +31,10 @@ const SearchContent = props => {
         {
             id: 2,
             images: [
-                require('../../storage/images/lima1.jpg'),
-                require('../../storage/images/gizem2.jpg'),
+                // require('../../storage/images/bananarepublic6.jpg'),
                 require('../../storage/images/lima3.jpg'),
+                require('../../storage/images/bananarepublic5.jpg'),
+                require('../../storage/images/bananarepublic7.jpg'),
             ],
         },
     ];
@@ -61,6 +63,7 @@ const SearchContent = props => {
                                                 source={imageData}
                                                 style={{ width: '100%', height: 150 }}
                                             />
+                                            {/* <PortfolioImageTag /> */}
                                         </TouchableOpacity>
                                     );
                                 })}

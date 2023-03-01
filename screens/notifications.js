@@ -5,12 +5,12 @@ import PostCard from '../shared/postCard';
 
 export default function Notifications({ navigation, route }) {
     const [notifications, setNitfication] = useState([
-        { name: 'Victoria\'s secret', address: 'victoriassecret', info: ' 23 yeni fotoğraf paylaştı.', date: 'Bugün', time: '21s', number: 1, body: 'lorem ipsum', key: '1' },
-        { name: 'Aslı Ateş', address: 'asliates', info: ' mesajını beğendi.', date: 'Bu Hafta', time: '5g', number: 2, body: 'lorem ipsum', key: '2' },
-        { name: 'Jen Selter', address: 'jenselter', info: ' sana mesaj attı.', date: 'Bugün', time: 'az önce', number: 3, body: 'lorem ipsum', key: '3' },
-        { name: 'Olya Abramovich', address: 'olyaabramovich', info: ' gönderini beğendi.', date: 'Bu Hafta', time: '2g önce', number: 4, body: 'lorem ipsum', key: '4' },
-        { name: 'Özge Bitmez', address: 'ozgebitmez', number: 5, info: ' senden bahsetti.', date: 'Bugün', time: '21s', body: 'lorem ipsum', key: '5' },
-        { name: 'Tammy Hembrow', address: 'tammyhembrow', number: 6, info: ' yeni fotoğraf paylaştı.', date: 'Bugün', time: '15g', body: 'lorem ipsum', key: '6' },
+        { name: 'Ali Türker', address: 'altrkr06', info: ' mesajını beğendi.', date: 'Bu Hafta', time: '5g', number: 1, body: 'lorem ipsum', key: '1' },
+        { name: 'Louis Vitton', address: 'louisvitton', info: ' gönderini beğendi.', date: 'Bu Hafta', time: '2g', number: 2, body: 'lorem ipsum', key: '2' },
+        // { name: 'Gizem Yılmaz', address: 'gzemyilmaz', info: ' gönderini beğendi.', date: 'Bu Hafta', time: '2g', number: 2, body: 'lorem ipsum', key: '2' },
+        { name: 'Mete', address: 'motun', info: ' sana mesaj attı.', date: 'Bugün', time: 'az önce', number: 3, body: 'lorem ipsum', key: '3' },
+        { name: 'Gucci', address: 'gucci', info: ' 4 yeni fotoğraf paylaştı.', date: 'Bugün', time: '21s', number: 4, body: 'lorem ipsum', key: '4' },
+        { name: 'Gizem Yılmaz', address: 'gzmyilmaz', number: 5, info: ' yeni fotoğraf paylaştı.', date: 'Bugün', time: '15g', body: 'lorem ipsum', key: '5' },
     ]);
 
     return (
@@ -21,8 +21,15 @@ export default function Notifications({ navigation, route }) {
                     <PostCard>
                         <View style={styles.cardHeader}>
                             <Image source={notificationData.profilePhotos[item.number]} style={styles.profilephoto} />
-                            {item.name == 'Victoria\'s secret' ? <Text><Text style={styles.username}>{item.name}</Text> 23 yeni fotoğraf paylaştı. <Text style={styles.notificationTime}>{item.time}</Text></Text> :
-                                <Text><Text style={styles.username}>{item.name}</Text>{item.info}<Text style={styles.notificationTime}>{item.time}</Text></Text>}
+                            <View style={{ justifyContent: 'flex-start', flexDirection: 'row', paddingHorizontal: 1 }}>
+                                <View style={{ borderRadius: 10, backgroundColor: ' rgba(230, 88, 41, 1)', }}>
+                                    <Text style={styles.notificationTime}> {item.time} </Text>
+                                </View>
+                            </View>
+                            <View style={{ alignItems: 'center', flexDirection: 'row' }}>
+                                <Text style={styles.username}>{item.name}</Text>
+                                <Text>{item.info}</Text>
+                            </View>
                         </View>
                     </PostCard>
                 </TouchableOpacity>
@@ -47,7 +54,12 @@ export const styles = StyleSheet.create({
     },
     notificationTime: {
         fontWeight: 'normal',
-        fontStyle: "rgba(f,f,f,.9)"
+        fontStyle: "rgba(f,f,f,.9)",
+        color: 'white',
+        // paddingHorizontal: 3,
+        paddingBottom: 2,
+        alignItems: 'center'
+        // fontSize: 11,
     },
     notificationGroupHeader: {
         fontWeight: 'bold',
@@ -71,7 +83,6 @@ export const styles = StyleSheet.create({
         marginLeft: 10,
         fontSize: 14,
         fontWeight: 'bold',
-        marginLeft: 10,
         // justifyContent: 'center',
     },
 });

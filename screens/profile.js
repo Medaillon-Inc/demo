@@ -1,101 +1,3 @@
-// import React from 'react';
-// import { StyleSheet, View, Button, Text, Image } from 'react-native';
-// import { globalStyles } from '../styles/global';
-// import { SimpleLineIcons } from '@expo/vector-icons';
-// import { photoStrings } from '../assets/strings/photos/photo64BaseStrings';
-
-// export default function Profile({ navigation, route }) {
-//     return (
-//         <View style={styles.body}>
-//             <View style={styles.infoSection}>
-//                 <View style={{ flexDirection: "row", justifyContent: "space-evenly", alignItems: "center" }}>
-//                     <View styles={styles.photoAndName}>
-//                         <Image
-//                             style={styles.profilePhoto}
-//                             source={{
-//                                 uri: photoStrings.pp.photo
-//                             }}
-//                         />
-//                     </View>
-//                     <View style={styles.postStatistics}>
-//                         <Text style={styles.statisticsNumber}>4</Text>
-//                         <Text>Gönderi</Text>
-//                     </View>
-//                     <View style={styles.followerStatistics}>
-//                         <Text style={styles.statisticsNumber}>1</Text>
-//                         <Text>Takipçi</Text>
-//                     </View>
-//                     <View style={styles.followStatistics}>
-//                         <Text style={styles.statisticsNumber}>25</Text>
-//                         <Text>Takip</Text>
-//                     </View>
-//                 </View>
-//             </View>
-//             <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
-//                 <Text style={styles.username}>Andreas Sparre</Text>
-//                 <Text style={styles.designDummy}>Gönderi</Text>
-//                 <Text style={styles.designDummy}>Takipçi</Text>
-//                 <Text style={styles.designDummy}>Takip</Text>
-//             </View>
-//             <View style={{ paddingLeft: 18 }}>
-//                 <Text>Cibiliyetsel krizler yaşayıcı.</Text>
-//             </View>
-//         </View>
-//     )
-// }
-
-// const styles = StyleSheet.create({
-//     body: {
-//         flex: 1,
-//         backgroundColor: "white",
-//     },
-//     infoSection: {
-//         paddingTop: 20,
-//     },
-//     profile: {
-//         flexDirection: "column",
-//     },
-//     photoAndName: {
-//         flexDirection: "column",
-//         alignItems: "center",
-//     },
-//     profilePhoto: {
-//         width: 70,
-//         height: 70,
-//         borderRadius: 50,
-//         alignSelf: "center",
-//     },
-//     username: {
-//         fontWeight: "bold",
-//         fontSize: 14,
-//         paddingTop: 10,
-//     },
-//     statistics: {
-//         flexDirection: "column",
-//     },
-//     postStatistics: {
-//         alignItems: "center",
-//     },
-//     statisticsNumber: {
-//         fontWeight: "bold",
-//         fontSize: 19,
-//     },
-//     followerStatistics: {
-//         alignItems: "center",
-//     },
-//     followStatistics: {
-//         alignItems: "center",
-//     },
-//     designDummy: {
-//         color: "white",
-//     },
-// });
-
-
-
-
-
-
 import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, StatusBar } from 'react-native';
 import { ProfileBody, ProfileButtons } from './screenComponents/ProfileBody';
@@ -109,6 +11,7 @@ const statusBarStyle = "white"
 const Profile = () => {
     let circuls = [];
     let numberofcircels = 10;
+    const usernameFound = false
 
     for (let index = 0; index < numberofcircels; index++) {
         circuls.push(
@@ -158,7 +61,6 @@ const Profile = () => {
                     });
                 })
             );
-        // console.log("Current logged in user: " + currentLoggedInUser)
         return unsubscribe
     }
 
@@ -166,33 +68,33 @@ const Profile = () => {
         getUsername()
     }, [])
 
-    let pf = currentLoggedInUser.profileImage
+
 
     return (
         <View style={{ width: '100%', height: '100%', backgroundColor: 'white' }}>
             <StatusBar backgroundColor={statusBarStyle} barStyle="dark-content" />
             <View style={{ width: '100%', padding: 8 }}>
                 <ProfileBody
-                    name={currentLoggedInUser.username}
-                    accountName={currentLoggedInUser.getUsername}
+                    name="Haute Le Mode"
+                    accountName="Haute Le Mode"
                     // profileImage={require('../storage/images/userProfile.png')}
                     // profileImage="https://randomuser.me/api/portraits/men/54.jpg"
-                    profileImage={pf}
+                    profileImage="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO2M-HByW1r0fiqOMYAfsgFy0WkEJodTBQMrPmWOe_di58YHr5Ami8cYWteDN1sUf3M9o&usqp=CAU"
                     followers="3.6M"
                     following="35"
                     post="458"
                 />
                 <ProfileButtons
                     id={0}
-                    name={currentLoggedInUser.username}
-                    accountName={currentLoggedInUser.username}
+                    name="Haute Le Mode"
+                    accountName="Haute Le Mode"
                     // profileImage={require('../storage/images/userProfile.png')}
-                    profileImage="https://randomuser.me/api/portraits/men/54.jpg"
+                    profileImage="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO2M-HByW1r0fiqOMYAfsgFy0WkEJodTBQMrPmWOe_di58YHr5Ami8cYWteDN1sUf3M9o&usqp=CAU"
 
                 />
             </View>
             <View>
-                {/* <Text style={{ color: 'black', fontSize: 22, fontWeight: "600" }}>asdads {currentLoggedInUser.profileImage}</Text> */}
+                {/* <Text style={{ color: 'black', fontSize: 22, fontWeight: "600" }}>asdads "https://randomuser.me/api/portraits/men/54.jpg"</Text> */}
                 <Text
                     style={{
                         padding: 10,
@@ -214,6 +116,6 @@ const Profile = () => {
             <BottomTabView />
         </View>
     );
-};
+}
 
 export default Profile;

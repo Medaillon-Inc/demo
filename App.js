@@ -73,6 +73,6 @@ export default function App() {
   // }
 
   return (
-    <AuthNavigation/>
+    <AuthNavigation />
   );
 }

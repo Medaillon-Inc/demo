@@ -17,67 +17,61 @@ export const globalStyles = StyleSheet.create({
 });
 
 export const images = {
-    photos: {
-        '1': require('../assets/modelPhotos/barbarapalvin.png'),
-        '2': require('../assets/modelPhotos/bellathorne.png'),
-        '3': require('../assets/modelPhotos/gigihadid.png'),
-        '4': require('../assets/modelPhotos/adrianalima.png'),
-        '5': require('../assets/modelPhotos/mervetaskin.png'),
-    },
+    // photos: {
+    //     '1': require('../assets/photos/modelPhotos/barbarapalvin.png'),
+    //     '2': require('../assets/photos/modelPhotos/bellathorne.png'),
+    //     '3': require('../assets/photos/modelPhotos/gigihadid.png'),
+    //     '4': require('../assets/photos/modelPhotos/adrianalima.png'),
+    //     '5': require('../assets/photos/modelPhotos/mervetaskin.png'),
+    // },
     profilePhotos: {
-        '1': require('../assets/modelPhotos/profilephotos/barbarapalvin.jpg'),
-        '2': require('../assets/modelPhotos/profilephotos/bellathorne.jpg'),
-        '3': require('../assets/modelPhotos/profilephotos/gigihadid.jpg'),
-        '4': require('../assets/modelPhotos/profilephotos/adrianalima.jpg'),
-        '5': require('../assets/modelPhotos/profilephotos/mervetaskin.jpg'),
-        '6': require('../assets/modelPhotos/profilephotos/jenselter.jpg'),
-        '7': require('../assets/modelPhotos/profilephotos/olyaabramovich.jpg'),
-        '8': require('../assets/modelPhotos/profilephotos/ozgebitmez.jpg'),
+        '1': require('../assets/photos/modelPhotos/profilePhotos/barbarapalvin.jpg'),
+        '4': require('../assets/photos/modelPhotos/profilePhotos/adrianalima.jpg'),
+        '3': require('../assets/photos/modelPhotos/profilePhotos/gigihadid.jpg'),
+        '5': require('../assets/photos/modelPhotos/profilePhotos/mervetaskin.jpg'),
     },
 };
 
 export const fanImages = {
     photos: {
-        '0': require('../assets/modelPhotos/barbarapalvin.png'),
-        '1': require('../assets/modelPhotos/bellathorne.png'),
-        '2': require('../assets/modelPhotos/gigihadid.png'),
-        '3': require('../assets/modelPhotos/adrianalima.png'),
-        '4': require('../assets/modelPhotos/mervetaskin.png'),
+        '0': require('../assets/photos/modelPhotos/barbarapalvin.png'),
     },
     profilePhotos: {
-        '0': require('../assets/fans/fanProfilePhotos/randomegirl.jpg'),
-        '1': require('../assets/fans/fanProfilePhotos/chad2.jpg'),
-        '2': require('../assets/fans/fanProfilePhotos/kurdishdayi.jpg'),
-        '3': require('../assets/fans/fanProfilePhotos/cilgindayi.jpg'),
-        '4': require('../assets/fans/fanProfilePhotos/incel.jpg'),
-        '5': require('../assets/fans/fanProfilePhotos/chad3.jpg'),
-        '6': require('../assets/fans/fanProfilePhotos/chad1.webp'),
+        '0': require('../assets/photos/fans/profilePhotos/randomegirl.jpg'),
+        '1': require('../assets/photos/fans/profilePhotos/chad2.jpg'),
+        '2': require('../assets/photos/fans/profilePhotos/kurdishdayi.jpg'),
+        '3': require('../assets/photos/fans/profilePhotos/cilgindayi.jpg'),
+        '4': require('../assets/photos/fans/profilePhotos/incel.jpg'),
+        '5': require('../assets/photos/fans/profilePhotos/chad3.jpg'),
+        '6': require('../assets/photos/fans/profilePhotos/chad1.webp'),
     },
 };
 
 export const notificationData = {
     profilePhotos: {
-        '1': require('../assets/modelPhotos/profilephotos/victoriassecret.jpg'),
-        '2': require('../assets/modelPhotos/profilephotos/asliates.jpg'),
-        '3': require('../assets/modelPhotos/profilephotos/jenselter.jpg'),
-        '4': require('../assets/modelPhotos/profilephotos/olyaabramovich.jpg'),
-        '5': require('../assets/modelPhotos/profilephotos/ozgebitmez.jpg'),
-        '6': require('../assets/modelPhotos/profilephotos/tammyhembrow.jpg'),
+        '4': require('../assets/photos/company/companyPhotos/gucci.png'),
+        '2': require('../assets/photos/company/companyPhotos/louisvuitton.png'),
+        '3': require('../assets/photos/fans/profilePhotos/motun.jpg'),
+        '1': require('../assets/photos/fans/profilePhotos/altrkr06.jpg'),
+        '5': require('../assets/photos/modelPhotos/profilePhotos/tammyhembrow.jpg'),
     },
 };
 
 export const challenges = {
     challengePhotos: {
-        '1': require('../assets/challengePhotos/highfashion1.jpg'),
-        '2': require('../assets/challengePhotos/reddress1.jpg'),
-        '3': require('../assets/challengePhotos/cosplay2.jpg'),
-        '4': require('../assets/challengePhotos/blonde.jpg'),
-        '5': require('../assets/challengePhotos/bikini.jpg'),
-        '6': require('../assets/challengePhotos/fit1.webp'),
-        '7': require('../assets/challengePhotos/bikini1.jpg'),
-        '8': require('../assets/challengePhotos/elevator.png'),
-        '9': require('../assets/challengePhotos/dyehair.jpg'),
-        '10': require('../assets/challengePhotos/characterise.png'),
-        '11': require('../assets/challengePhotos/tattooedwoman.webp'),
+        '1': require('../assets/photos/challengePhotos/highfashion1.jpg'),
+        '2': require('../assets/photos/challengePhotos/kratos.png'),
+        '3': require('../assets/photos/challengePhotos/casual.jpg'),
+        '4': require('../assets/photos/challengePhotos/sport.jpg'),
+        '5': require('../assets/photos/challengePhotos/country.jpg'),
+        '6': require('../assets/photos/challengePhotos/fit1.webp'),
+        '7': require('../assets/photos/challengePhotos/natural.jpg'),
+        '8': require('../assets/photos/challengePhotos/date.jpg'),
+        '9': require('../assets/photos/challengePhotos/dyehair.jpg'),
+        '10': require('../assets/photos/challengePhotos/tattooedwoman.webp'),
     },
 };
+
+export const logos = {
+    "medaillon_logo - big - app": require('../assets/medaillon_logo - big - app.png'),
+}
