@@ -152,8 +152,12 @@ export default function ProfileHeader({ navigation, title, name, accountName, pr
                 <SimpleLineIcons style={{ paddingLeft: 10, paddingTop: 10, }} name="arrow-down" size={10} color="black" />
             </View>
             <View style={styles.rightSide}>
-                <TouchableOpacity onPress={() => navigation.push('NewPostScreen')}>
+                {/* <TouchableOpacity onPress={() => navigation.push('NewPostScreen')}>
                     <Feather style={styles.icon} name="plus-square" size={29} color="black" />
+                </TouchableOpacity> */}
+                <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
+                    {/* <Ionicons style={styles.icon} name="md-notifications-outline" size={28} color="color: 'rgba(255,255,255,0.7)'" /> */}
+                    <Ionicons style={styles.icon} name="md-notifications-outline" size={29} color="black" />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setModalOpen(true)}>
                     <SimpleLineIcons style={styles.icon} name="menu" size={24} color="black" />
@@ -225,7 +229,7 @@ const styles = StyleSheet.create({
     },
     header: {
         width: "100%",
-        height: 45,
+        height: 55,
         paddingTop: 0,
         flexDirection: 'row',
         alignItems: 'baseline',
@@ -236,7 +240,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingTop: 5,
-        paddingLeft: 5,
+        paddingLeft: 0,
     },
     rightSide: {
         // position: "absolute",
