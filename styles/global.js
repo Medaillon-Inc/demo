@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+export const darkMode = true;
+
 export const globalStyles = StyleSheet.create({
     titleText: {
         fontSize: 18,
