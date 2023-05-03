@@ -4,10 +4,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../screens/home';
-import Messages from '../screens/messages';
+import Messages from '../screens/inbox';
 import Notifications from '../screens/notifications';
 import MedaillonContests from '../screens/medaillon';
-import Search from '../screens/search';
+import Search from '../screens/trends';
 import Header from '../shared/header';
 
 const HomeStack = createNativeStackNavigator();

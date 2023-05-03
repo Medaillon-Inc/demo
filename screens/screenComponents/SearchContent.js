@@ -20,7 +20,7 @@ const SearchContent = props => {
         {
             id: 1,
             images: [
-                require('../../assets/challengePhotos/highfashion1.jpg'),
+                require('../../assets/photos/challengePhotos/highfashion1.jpg'),
                 require('../../storage/images/jenner1.jpg'),
                 require('../../storage/images/bananarepublic1.jpg'),
                 require('../../storage/images/bananarepublic2.jpg'),

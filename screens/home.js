@@ -1,221 +1,391 @@
-import React, { useState } from 'react';
-import { FlatList, Image, View, Dimensions, StatusBar, StyleSheet, Text, TouchableOpacity, SafeAreaView, } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import { NativeBaseConfigProvider } from 'native-base';
-import { LinearGradient } from 'expo-linear-gradient';
-import { challenges, logos } from '../styles/global';
-import PortfolioImageTag from './screenComponents/PortfolioImageTag';
-import * as Animatable from 'react-native-animatable';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, StyleSheet, Dimensions, StatusBar, ActivityIndicator, ScrollView, TouchableOpacity, Text } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
+import { Video } from 'expo-av';
+import * as NavigationBar from 'expo-navigation-bar';
+import { Asset } from 'expo-asset';
+import { Ionicons } from '@expo/vector-icons';
+import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
+import CommentsModal from './screenComponents/CommentsModal';
 
+const { width, height } = Dimensions.get('window');
+const tabBarHeight = 49;
+const adjustedHeight = height - tabBarHeight;
 
-export default function Home() {
+export default function Home({ navigation }) {
 
-    let { width: screenWidth, height: screenHeight } = Dimensions.get('window')
-    const [challengeDatas, setChallenges] = useState([
-        { title: 'High Fashion', number: 1, body: 'lorem ipsum', key: '1' },
-        { title: 'Cosplay', number: 2, body: 'lorem ipsum', key: '2' },
-        { title: 'Casual', number: 3, body: 'lorem ipsum', key: '3' },
-        { title: 'Sport', number: 4, body: 'lorem ipsum', key: '4' },
-        { title: 'Country', number: 5, body: 'lorem ipsum', key: '5' },
-        { title: 'Fit', number: 6, body: 'lorem ipsum', key: '6' },
-        { title: 'Natural', number: 7, body: 'lorem ipsum', key: '7' },
-        { title: 'Date', number: 8, body: 'lorem ipsum', key: '8' },
-        { title: 'Dye Hair', number: 9, body: 'lorem ipsum', key: '9' },
-        { title: 'Tattoo', number: 10, body: 'lorem ipsum', key: '10' },
+    NavigationBar.setBackgroundColorAsync("black");
+    const [isVisible, setIsVisible] = useState(false);
+    const [activeVideo, setActiveVideo] = useState(0);
+    const [isLoading, setIsLoading] = useState([]); // Initialize with empty array
+    const videoRefs = useRef([]);
+
+    const [comments, setComments] = useState([
+        {
+            id: '1',
+            user: {
+                username: 'john_doe',
+                profile_picture: 'https://i.pravatar.cc/150?img=1',
+            },
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac diam tortor. Integer sollicitudin, risus eget tristique hendrerit, arcu tellus vehicula lorem, eu elementum sapien sem et risus.',
+            likes: 12,
+            liked: false,
+            replyCount: 2,
+            showReplies: false,
+            replies: [
+                {
+                    id: '1-1',
+                    user: {
+                        username: 'jane_doe',
+                        profile_picture: 'https://i.pravatar.cc/150?img=2',
+                    },
+                    text: 'Nullam a orci sit amet nisl venenatis finibus a ut eros. Sed interdum, urna eget ullamcorper varius, metus mauris mattis velit, vel pellentesque leo odio eu metus.',
+                    likes: 5,
+                    liked: true,
+                },
+                {
+                    id: '1-2',
+                    user: {
+                        username: 'bob_smith',
+                        profile_picture: 'https://i.pravatar.cc/150?img=3',
+                    },
+                    text: 'Cras vel sapien ac justo pharetra pretium. Sed vehicula, enim non fringilla fringilla, enim mauris commodo arcu, vitae pulvinar mauris sapien a purus.',
+                    likes: 3,
+                    liked: false,
+                },
+            ],
+        },
+        {
+            id: '2',
+            user: {
+                username: 'jane_doe',
+                profile_picture: 'https://i.pravatar.cc/150?img=2',
+            },
+            text: 'Vivamus in mi euismod, sollicitudin lectus vitae, laoreet turpis. Sed eget nunc vel nisi pulvinar suscipit. Donec nec dolor augue. Etiam condimentum sapien arcu, in facilisis augue posuere sit amet. ',
+            likes: 3,
+            liked: false,
+            replyCount: 0,
+            showReplies: false,
+            replies: [],
+        },
+        {
+            id: '3',
+            user: {
+                username: 'bob_smith',
+                profile_picture: 'https://i.pravatar.cc/150?img=3',
+            },
+            text: 'Praesent euismod ipsum id laoreet finibus. Maecenas tristique risus ac dui pharetra, nec fermentum dolor molestie. Etiam varius dictum mauris, ac vehicula nisi varius non. ',
+            likes: 5,
+            liked: true,
+            replyCount: 1,
+            showReplies: false,
+            replies: [
+                {
+                    id: '3-1',
+                    user: {
+                        username: 'john_doe',
+                        profile_picture: 'https://i.pravatar.cc/150?img=1',
+                    },
+                    text: 'Aliquam eu nunc quis quam consectetur blandit eu a ante. Donec non malesuada purus. Aenean vehicula lacinia velit, quis venenatis metus maximus id.',
+                    likes: 2,
+                    liked: false,
+                },
+            ],
+        },
     ]);
-    const exploreImages = [
+
+
+    const [videoData, setVideoData] = useState([
         {
-            "id": 0,
-            "tag": "#cosplay",
-            "image": require('../storage/images/kratos.png'),
+            id: '1',
+            uri: require('../storage/videos/palvin1.mp4'),
+            liked: false,
+            likes: 123,
+            width: null,
+            height: null,
         },
         {
-            "id": 1,
-            "icon": logos['medaillon_logo - big - app'],
-            "tag": "HighFashion",
-            "image": require('../storage/images/hadid1.jpg'),
+            id: '2',
+            uri: require('../storage/videos/video2.mp4'),
+            liked: false,
+            likes: 231,
+            width: null,
+            height: null,
         },
         {
-            "id": 2,
-            "tag": "#date",
-            "image": require('../storage/images/palvin3.png'),
+            id: '3',
+            uri: require('../storage/videos/video3.mp4'),
+            liked: false,
+            likes: 150,
+            width: null,
+            height: null,
         },
-        {
-            "id": 3,
-            "tag": "#casual",
-            "image": require('../storage/images/hadid2.jpg'),
-        },
-        {
-            "id": 4,
-            "image": require('../storage/images/bananarepublic7.jpg'),
-        },
-        {
-            "id": 5,
-            "tag": "#cosplay",
-            "image": require('../storage/images/scarletwitch.jpg'),
-        },
-        {
-            "id": 6,
-            "tag": "#natural",
-            "image": require('../storage/images/jenner1.jpg'),
-        },
-        {
-            "id": 7,
-            "image": require('../storage/images/bananarepublic1.jpg'),
-        },
-        {
-            "id": 8,
-            "image": require('../storage/images/barbarapalvin.png'),
-        },
-        {
-            "id": 9,
-            "image": require('../storage/images/hadid3.jpg'),
-        },
-        {
-            "id": 10,
-            "image": require('../storage/images/bananarepublic8.jpg'),
-        },
-        {
-            "id": 11,
-            "tag": "#formal",
-            "image": require('../storage/images/bananarepublic2.jpg'),
-        },
-        {
-            "id": 12,
-            "tag": "Sponsored",
-            "image": require('../storage/images/palvin1.jpg'),
-        },
-        {
-            "id": 13,
-            "icon": logos['medaillon_logo - big - app'],
-            "tag": "HighFashion",
-            "image": require('../storage/images/lima3.jpg'),
-        },
-        {
-            "id": 14,
-            "tag": "#country",
-            "image": require('../storage/images/bananarepublic5.jpg'),
-        },
-        // {
-        //     "image": require('../storage/images/bananarepublic9.jpg'),
-        // },
-    ];
+    ]);
+
+    useEffect(() => {
+        videoRefs.current = videoRefs.current.slice(0, videoData.length);
+        if (videoRefs.current[activeVideo]) {
+            videoRefs.current[activeVideo].playAsync();
+        }
+    }, [activeVideo]);
+
+    useEffect(() => {
+        (async () => {
+            for (const video of videoData) {
+                const asset = Asset.fromModule(video.uri);
+                await asset.downloadAsync();
+                video.uri = asset.uri;
+            }
+            setIsLoading(new Array(videoData.length).fill(false)); // Update isLoading here
+        })();
+    }, []);
+
+    useFocusEffect(
+        React.useCallback(() => {
+            if (videoRefs.current[activeVideo]) {
+                videoRefs.current[activeVideo].playAsync();
+            }
+
+            return () => {
+                if (videoRefs.current[activeVideo]) {
+                    videoRefs.current[activeVideo].pauseAsync();
+                }
+            };
+        }, [activeVideo])
+    );
+
+    const toggleModal = () => {
+        setIsVisible(!isVisible);
+    };
+
+    const toggleLike = (index) => {
+        setVideoData((prevData) => {
+            const newData = [...prevData];
+            newData[index].liked = !newData[index].liked;
+            newData[index].likes += newData[index].liked ? 1 : -1;
+            return newData;
+        });
+    };
+
+
+    const onPlaybackStatusUpdate = (playbackStatus, index) => {
+        if (playbackStatus.didJustFinish) {
+            videoRefs.current[index].replayAsync();
+        }
+
+        if (playbackStatus.isLoaded) {
+            setIsLoading((prev) => {
+                const updated = [...prev];
+                updated[index] = false;
+                return updated;
+            });
+        }
+
+        // Eğer video şu anki aktif video değilse, duraklatın
+        if (index !== activeVideo && playbackStatus.isPlaying) {
+            videoRefs.current[index].pauseAsync();
+        }
+    };
+
+
+    const toggleVideoPlayback = async (index) => {
+        const videoRef = videoRefs.current[index];
+        const status = await videoRef.getStatusAsync();
+
+        if (status.isPlaying) {
+            videoRef.pauseAsync();
+        } else {
+            videoRef.playAsync();
+        }
+    };
+
+    const calculateVideoDimensions = (video) => {
+        const videoAspectRatio = video.width / video.height;
+        const screenAspectRatio = width / height;
+
+        if (videoAspectRatio > screenAspectRatio) {
+            // Video is wider than the screen
+            return {
+                width: width,
+                height: width / videoAspectRatio,
+            };
+        } else {
+            // Video is taller than the screen
+            return {
+                width: height * videoAspectRatio,
+                height: height,
+            };
+        }
+    };
+
+    const onVideoLayout = (event, index) => {
+        const { width: videoWidth, height: videoHeight } = event.nativeEvent.layout;
+        setVideoData((prevData) => {
+            const newData = [...prevData];
+            newData[index].width = videoWidth;
+            newData[index].height = videoHeight;
+            return newData;
+        });
+    };
+
 
     return (
-        <SafeAreaView>
-            <StatusBar backgroundColor='white' barStyle="dark-content" />
-            <ScrollView horizontal={false}>
-                <View style={{ flexDirection: 'row', position: "relative", }}>
-                    {/* <ScrollView horizontal={true} style={{ paddingVertical: 15, paddingHorizontal: 10, backgroundColor: "#141414", }}> */}
-                    <ScrollView horizontal={true} style={{ paddingVertical: 15, paddingHorizontal: 10, }}>
-                        {/* {mRight = item.key == 10 ? 5 : 12} */}
-                        {challengeDatas.map(item => (
-                            <View key={item.key} style={{ alignItems: "center", marginRight: item.key == 10 ? 0 : 12, marginLeft: 5, paddingBottom: 0, }}>
-                                <LinearGradient
-                                    // colors={['#c71c41', '#c7308f', '#']}
-                                    // colors={['#fc03ec', '#a103fc', '#2883fa']}
-                                    colors={['#fc03ec', '#ff8501', '#2883fa']}
-                                    locations={[0.1, 0.4, 1]}
-                                    start={{ x: 1, y: 0.5 }}
-                                    end={{ x: 0.2, y: 1 }}
-                                    style={styles.storyCircle}>
-                                    <Image source={challenges.challengePhotos[item.number]} style={styles.categoryPhoto} />
-
-                                </LinearGradient>
-                                {/* <Text style={{ fontSize: 13, fontWeight: "600", paddingTop: 5, color: 'rgba(255,255,255,0.7)' }}>{item.title}</Text> */}
-                                <Text style={{ fontSize: 13, fontWeight: "500", paddingTop: 5, }}>{item.title}</Text>
+        <View style={styles.container}>
+            <StatusBar backgroundColor="black" barStyle="light-content" />
+            <ScrollView
+                pagingEnabled
+                vertical
+                showsVerticalScrollIndicator={false}
+                onScroll={(event) => {
+                    const offsetY = event.nativeEvent.contentOffset.y;
+                    const pageIndex = Math.round(offsetY / height);
+                    setActiveVideo(pageIndex);
+                }}
+                scrollEventThrottle={16}
+            >
+                {videoData.map((video, index) => (
+                    <View key={video.id} style={[styles.videoContainer, { height: adjustedHeight }]}>
+                        <Video
+                            ref={(ref) => (videoRefs.current[index] = ref)}
+                            source={{ uri: video.uri }}
+                            rate={1.0}
+                            volume={1.0}
+                            isMuted={false}
+                            resizeMode="cover"
+                            shouldPlay={index === 0}
+                            isLooping={false}
+                            style={styles.video}
+                            onPlaybackStatusUpdate={(status) => onPlaybackStatusUpdate(status, index)}
+                        />
+                        {isLoading[index] && (
+                            <View style={styles.indicatorContainer}>
+                                <ActivityIndicator size="large" color="#ffffff" />
                             </View>
-                        ))}
+                        )}
                         <TouchableOpacity
-                            style={{
-                                marginBottom: 25,
-                                marginTop: 5,
-                                marginLeft: 20,
-                                marginRight: 25,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                            }}>
-                            <AntDesign name="pluscircleo" style={{ fontSize: 40, opacity: 0.5, }} />
-                        </TouchableOpacity>
-                    </ScrollView>
-                </View >
-                <FlatList
-                    // style={{ position: "absolute", top: 200, zIndex: 11 }}
-                    horizontal={false}
-                    numColumns={3}
-                    data={exploreImages}
-                    keyExtractor={item => item.id}
-                    renderItem={({ item }) =>
-                        <Animatable.View
-                            style={{ flex: 1, alignItems: 'center' }}
-                            animation="zoomIn"
-                            delay={item.id * 200}
-                            useNativeDriver={true}
-                        >
-                            <Image
-                                source={item.image}
-                                style={{
-                                    height: screenWidth / 2,
-                                    width: screenWidth / 3,
-                                }}
-                            />
-                            <PortfolioImageTag tag={item.tag} icon={item.icon} />
-                        </Animatable.View>
-                    }
+                            style={styles.touchableOverlay}
+                            onPress={() => toggleVideoPlayback(index)}
+                            activeOpacity={1}
+                        />
+                        <View style={styles.videoInfo}>
+                            <View style={styles.infoColumn}>
+                                <View style={styles.infoRow}>
+                                    <Ionicons name="person" size={24} color="white" />
+                                    <Text style={styles.infoText}>@hautelemode</Text>
+                                </View>
+                                <View style={styles.infoRow}>
+                                    <MaterialIcons name="music-note" size={24} color="white" />
+                                    <Text style={styles.infoText}>Artist - Song</Text>
+                                </View>
+                            </View>
+                            <View style={styles.iconColumn}>
+                                <View style={styles.iconContainer}>
+                                    <TouchableOpacity onPress={() => toggleLike(index)}>
+                                        <Ionicons name={'heart'} size={32} color={video.liked ? "red" : "white"} />
+                                    </TouchableOpacity>
+                                    <Text style={styles.iconText}>{video.likes}</Text>
+                                </View>
+                                <View style={styles.iconContainer}>
+                                    {/* <TouchableOpacity onPress={() => navigation.navigate('CommentsModal')}>
+                                        <FontAwesome name="commenting" size={32} color="white" />
+                                    </TouchableOpacity> */}
+                                    <TouchableOpacity onPress={toggleModal}>
+                                        <FontAwesome name="commenting" size={32} color="white" />
+                                    </TouchableOpacity>
+                                    <Text style={styles.iconText}>23</Text>
+                                </View>
+                                <View style={styles.iconContainer}>
+                                    <Ionicons name="share-social" size={32} color="white" />
+                                    <Text style={styles.iconText}>12</Text>
+                                </View>
+                                <View style={styles.profileImageContainer}>
+                                    <Ionicons name="person-circle" size={48} color="white" />
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                ))}
+                <CommentsModal
+                    comments={comments}
+                    isVisible={isVisible}
+                    toggleModal={toggleModal}
                 />
             </ScrollView>
-        </SafeAreaView>
+        </View>
     );
 }
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "black",
+        backgroundColor: '#000',
     },
-    categories: {
-        flexDirection: "row",
+    videoContainer: {
+        width,
+        height,
     },
-    storyCircle: {
-        borderRadius: 50,
+    video: {
+        width,
+        height,
+        marginBottom: 90,
+        position: 'absolute',
     },
-    categoryPhoto: {
-        borderRadius: 50,
-        width: 65,
-
-        height: 65,
-        // marginLeft: 11,
-        // borderWidth: 2.25,
-        borderWidth: 3,
-        // borderColor: '#ff8501',
-        borderColor: 'white',
-        margin: 3
-    },
-    cardHeader: {
-        flexDirection: 'row',
+    indicatorContainer: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        justifyContent: 'center',
         alignItems: 'center',
-        paddingBottom: 10,
-        paddingLeft: 10,
+        zIndex: 1,
     },
-    profilephoto: {
-        borderRadius: 50,
-        width: 40,
-        height: 40,
-    },
-    photo: {
-        width: '100%',
-        height: 500,
+    touchableOverlay: {
+        width,
+        height: adjustedHeight,
+        position: 'absolute',
     },
     username: {
-        fontSize: 15,
-        fontWeight: '600',
-        marginLeft: 10,
-        // justifyContent: 'center',
+        color: '#ffffff',
+        fontSize: 16,
+        marginRight: 8,
     },
-    titleText: {
-        fontFamily: "Billabong",
-        fontSize: 35,
-        color: '#333',
+    videoInfo: {
+        position: 'absolute',
+        bottom: 16,
+        left: 16,
+        right: 16,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    infoColumn: {
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+    },
+    infoRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 8,
+    },
+    infoText: {
+        color: '#ffffff',
+        fontSize: 16,
+        marginLeft: 4,
+        alignItems: 'baseline',
+    },
+    iconColumn: {
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    iconContainer: {
+        alignItems: 'center',
+        marginBottom: 16,
+    },
+    iconText: {
+        color: '#ffffff',
+        fontSize: 14,
+    },
+    profileImageContainer: {
+        alignItems: 'center',
     },
 });

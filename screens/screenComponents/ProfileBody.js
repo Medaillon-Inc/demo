@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StatusBar } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 
@@ -13,6 +13,7 @@ export const ProfileBody = ({
 }) => {
     return (
         <View>
+            <StatusBar backgroundColor="white" barStyle="dark-content"/>
             {/* {accountName ? (
                 <View
                     style={{

@@ -1,12 +1,12 @@
 import { useCallback } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, StatusBar } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { SimpleLineIcons } from '@expo/vector-icons';
-import { globalStyles } from '../styles/global';
+import { darkMode, globalStyles } from '../styles/global';
 import { useFonts } from 'expo-font';
 import { firebase } from '../firebase'
 // import { useNavigation } from '@react-navigation/native';
@@ -21,7 +21,9 @@ const handleSignOut = async () => {
     }
 }
 
-export default function Header({ navigation, title, navigating }) {
+const bgColor = darkMode ? "black" : "white";
+
+export default function Header({ navigation, title }) {
     // const navigator = useNavigation();
 
     const [fontsLoaded] = useFonts({
@@ -31,13 +33,14 @@ export default function Header({ navigation, title, navigating }) {
     const onLayoutRootView = useCallback(async () => {
         if (!fontsLoaded) {
             return (
-                <Text>Bi bok dönmedi</Text>
+                <Text>An error occured</Text>
             )
         }
     }, [fontsLoaded]);
 
     return (
         <View style={styles.header}>
+            <StatusBar barStyle="light-content" />
             <View style={styles.leftSide}>
                 <TouchableOpacity onPress={handleSignOut}>
                     <Text style={styles.headerTitleStyle}>{title}</Text>
@@ -50,7 +53,7 @@ export default function Header({ navigation, title, navigating }) {
                 <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
                     {/* <FontAwesome style={styles.icon} name="heart-o" size={24} color="black" /> */}
                     {/* <Feather name="search" size={25} color="color: 'rgba(255,255,255,0.7)'" style={{ paddingLeft: 10 }} /> */}
-                    <Feather name="search" size={25} color="black" style={{ paddingLeft: 10 }} />
+                    {/* <Feather name="search" size={25} color="black" style={{ paddingLeft: 10 }} /> */}
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
                     {/* <Ionicons style={styles.icon} name="md-notifications-outline" size={28} color="color: 'rgba(255,255,255,0.7)'" /> */}
@@ -76,11 +79,12 @@ const styles = StyleSheet.create({
     header: {
         width: '100%',
         height: 56,
+        // height: 96,
         flexDirection: 'row',
         alignItems: 'center',
         paddingTop: 0,
-        backgroundColor: '#fff'
-        // backgroundColor: '#141414'
+        // backgroundColor: bgColor,
+        backgroundColor: '#141414'
         // justifyContent: 'center',
     },
     leftSide: {
@@ -95,7 +99,7 @@ const styles = StyleSheet.create({
         paddingTop: 17,
         fontFamily: 'Billabong',
         fontSize: 30,
-        // color: 'rgba(255,255,255,0.7)'
+        color: 'rgba(255,255,255,0.7)'
     },
     // headerText: {
     //     fontFamily: 'Billabong',
