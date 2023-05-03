@@ -1,7 +1,7 @@
+import React, { useCallback } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native'
-import { Text } from 'react-native';
-import React, { useCallback } from 'react';
+import { Text, SafeAreaView } from 'react-native';
 // import HomeScreen from './screens/HomeScreen'
 import NewPostScreen from './screens/NewPostScreen'
 import LoginScreen from './screens/LoginScreen';
@@ -9,16 +9,18 @@ import SignupScreen from './screens/SignupScreen';
 import * as SplashScreen from 'expo-splash-screen';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
-import Messages from './screens/messages';
+import Messages from './screens/inbox';
 import EditProfile from './screens/screenComponents/EditProfile';
 import Profile from './screens/profile';
-import Search from './screens/search';
+import StoryScreen from './screens/StoryScreen';
+import Trends from './screens/trends';
 import Medaillon from './screens/medaillon';
 import Notifications from './screens/notifications';
 import HomeTabs from './tabs/HomeTabs';
 import Header from './shared/header';
 import SinglePost from './screens/singlePost';
 import Comments from './screens/comments';
+import CommentsModal from './screens/screenComponents/CommentsModal';
 import { NativeBaseConfigProvider } from 'native-base';
 
 
@@ -70,11 +72,11 @@ export const SignedInStack = () => {
                     screenOptions={screenOptions}
                 >
                     <Stack.Screen name="HomeTabs" component={HomeTabs} />
-                    <Stack.Screen name="Search" component={Search} options={{
+                    <Stack.Screen name="Trends" component={Trends} options={{
                         // title: 'Ara', headerShadowVisible: false, headerTitleStyle: {
                         //   fontWeight: 'bold',
                         // },
-                        headerTitle: () => <Header title='Ara' />
+                        headerTitle: () => <Header title='Trends' />
                     }} />
                     <Stack.Screen name="Medaillon" component={Medaillon} options={{
                         title: 'Yarışmalar', headerTitleStyle: {
@@ -94,6 +96,8 @@ export const SignedInStack = () => {
                         // headerTitleStyle: { fontWeight: "600", fontSize: 22, }
                     }} />
                     <Stack.Screen name='NewPostScreen' component={NewPostScreen} />
+                    <Stack.Screen name='StoryScreen' component={StoryScreen} />
+                    <Stack.Screen name="CommentsModal" component={CommentsModal} />
                 </Stack.Navigator >
                 {/* <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeStackScreen} />
@@ -128,7 +132,7 @@ export const SignedOutStack = () => {
                 screenOptions={screenOptions}
             >
                 <Stack.Screen name='LoginScreen' component={LoginScreen} />
-                <Stack.Screen name='SignupScreen' component={SignupScreen}/>
+                <Stack.Screen name='SignupScreen' component={SignupScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     )

@@ -1,14 +1,15 @@
 import React, { useCallback } from 'react';
-import { Text } from 'react-native';
+import { Text, SafeAreaView } from 'react-native';
 import { useFonts } from 'expo-font';
 // import { AppLoading } from 'expo';
 import * as SplashScreen from 'expo-splash-screen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Messages from './screens/messages';
+import Messages from './screens/inbox';
 import EditProfile from './screens/screenComponents/EditProfile';
 import Profile from './screens/profile';
-import Search from './screens/search';
+// import Search from './screens/search';
+import Trends from './screens/trends';
 import Medaillon from './screens/medaillon';
 import Notifications from './screens/notifications';
 import HomeTabs from './tabs/HomeTabs';
@@ -73,6 +74,8 @@ export default function App() {
   // }
 
   return (
-    <AuthNavigation />
+    <SafeAreaView style={{flex: 1}}>
+      <AuthNavigation />
+    </SafeAreaView>
   );
 }
