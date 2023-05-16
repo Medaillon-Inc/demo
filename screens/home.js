@@ -20,80 +20,11 @@ export default function Home({ navigation }) {
     const [isLoading, setIsLoading] = useState([]); // Initialize with empty array
     const videoRefs = useRef([]);
 
-    const [comments, setComments] = useState([
-        {
-            id: '1',
-            user: {
-                username: 'john_doe',
-                profile_picture: 'https://i.pravatar.cc/150?img=1',
-            },
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac diam tortor. Integer sollicitudin, risus eget tristique hendrerit, arcu tellus vehicula lorem, eu elementum sapien sem et risus.',
-            likes: 12,
-            liked: false,
-            replyCount: 2,
-            showReplies: false,
-            replies: [
-                {
-                    id: '1-1',
-                    user: {
-                        username: 'jane_doe',
-                        profile_picture: 'https://i.pravatar.cc/150?img=2',
-                    },
-                    text: 'Nullam a orci sit amet nisl venenatis finibus a ut eros. Sed interdum, urna eget ullamcorper varius, metus mauris mattis velit, vel pellentesque leo odio eu metus.',
-                    likes: 5,
-                    liked: true,
-                },
-                {
-                    id: '1-2',
-                    user: {
-                        username: 'bob_smith',
-                        profile_picture: 'https://i.pravatar.cc/150?img=3',
-                    },
-                    text: 'Cras vel sapien ac justo pharetra pretium. Sed vehicula, enim non fringilla fringilla, enim mauris commodo arcu, vitae pulvinar mauris sapien a purus.',
-                    likes: 3,
-                    liked: false,
-                },
-            ],
-        },
-        {
-            id: '2',
-            user: {
-                username: 'jane_doe',
-                profile_picture: 'https://i.pravatar.cc/150?img=2',
-            },
-            text: 'Vivamus in mi euismod, sollicitudin lectus vitae, laoreet turpis. Sed eget nunc vel nisi pulvinar suscipit. Donec nec dolor augue. Etiam condimentum sapien arcu, in facilisis augue posuere sit amet. ',
-            likes: 3,
-            liked: false,
-            replyCount: 0,
-            showReplies: false,
-            replies: [],
-        },
-        {
-            id: '3',
-            user: {
-                username: 'bob_smith',
-                profile_picture: 'https://i.pravatar.cc/150?img=3',
-            },
-            text: 'Praesent euismod ipsum id laoreet finibus. Maecenas tristique risus ac dui pharetra, nec fermentum dolor molestie. Etiam varius dictum mauris, ac vehicula nisi varius non. ',
-            likes: 5,
-            liked: true,
-            replyCount: 1,
-            showReplies: false,
-            replies: [
-                {
-                    id: '3-1',
-                    user: {
-                        username: 'john_doe',
-                        profile_picture: 'https://i.pravatar.cc/150?img=1',
-                    },
-                    text: 'Aliquam eu nunc quis quam consectetur blandit eu a ante. Donec non malesuada purus. Aenean vehicula lacinia velit, quis venenatis metus maximus id.',
-                    likes: 2,
-                    liked: false,
-                },
-            ],
-        },
-    ]);
+    const [modalVisible, setModalVisible] = useState(false);
 
+    const toggleModal = () => {
+        setModalVisible(!modalVisible);
+    };
 
     const [videoData, setVideoData] = useState([
         {
@@ -153,10 +84,6 @@ export default function Home({ navigation }) {
             };
         }, [activeVideo])
     );
-
-    const toggleModal = () => {
-        setIsVisible(!isVisible);
-    };
 
     const toggleLike = (index) => {
         setVideoData((prevData) => {
@@ -305,12 +232,11 @@ export default function Home({ navigation }) {
                         </View>
                     </View>
                 ))}
-                <CommentsModal
-                    comments={comments}
-                    isVisible={isVisible}
-                    toggleModal={toggleModal}
-                />
             </ScrollView>
+            <CommentsModal
+                visible={modalVisible}
+                closeModal={() => setModalVisible(false)}
+            />
         </View>
     );
 }
@@ -352,7 +278,7 @@ const styles = StyleSheet.create({
     },
     videoInfo: {
         position: 'absolute',
-        bottom: 16,
+        bottom: 30,
         left: 16,
         right: 16,
         flexDirection: 'row',

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { StyleSheet, View, Image, TextInput, TouchableOpacity, Text, Dimensions } from 'react-native';
 import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
-import * as Progress from 'react-native-progress';
+import * as Progress from 'react-native-progress/Bar';
 
 const { width, height } = Dimensions.get('window');
 
