@@ -159,96 +159,15 @@ export default function HomeTabs({ navigation }) {
                     justifyContent: 'center',
                     alignItems: 'center',
                     gestureEnabled: true,
+                    position: "absolute",
+                    bottom: 0
                 },
                 activeColor: "white",
                 inactiveColor: "gray",
                 tabBarInactiveTintColor: "gray",
                 tabBarActiveTintColor: "white",
                 tabBarIcon: ({ focused, color, size }) => {
-
-                    // if (route.name === 'Home') {
-                    //     iconName = focused
-                    //         ? "home"
-                    //         : "home";
-                    // } else if (route.name === 'Trends') {
-                    //     iconName = focused ? "trends" : "trends";
-                    // }
-                    // else if (route.name === 'MedaillonContests') {
-                    //     iconName = focused ? "home" : "home";
-                    // }
-                    // if (route.name === 'Medaillon') {
-                    //     if (focused) {
-                    //         return null;
-                    //         // <Image
-                    //         //     style={{ width: 35, height: 35 }}
-                    //         //     source={require('../assets/medaillon_logo-big-transparent.png')}
-                    //         // />
-                    //     } else {
-                    //         return <Image
-                    //             style={{ width: tabBarIconInfos.medaillonSize, height: tabBarIconInfos.medaillonSize }}
-                    //             source={require('../assets/medaillon_logo-big-transparent.png')}
-                    //         />
-                    //     }
-                    // }
-                    // else if (route.name === 'Home') {
-                    //     if (focused) {
-                    //         // return <Foundation name="home" size={24} color="black" />
-                    //         return <Feather name="home" size={24} color="white" />
-                    //     } else {
-                    //         // return <Foundation name="home" size={24} color="white" />
-                    //         return <Feather name="home" size={24} color="white" />
-                    //     }
-                    // } else if (route.name === 'Trends') {
-                    //     if (focused) {
-                    //         return <Feather name="trends" size={24} color="white" />
-                    //     } else {
-                    //         return <Feather name="trends" size={24} color="white" />
-                    //     }
-                    // } else if (route.name === 'Shop') {
-                    //     if (focused) {
-                    //         return <MaterialCommunityIcons name="shopping" size={24} color="black" />
-                    //     } else {
-                    //         return <MaterialCommunityIcons name="shopping-outline" size={24} color="white" />
-                    //     }
-                    // } else if (route.name === 'Profile') {
-                    //     if (focused) {
-                    //         // size = size + 6;
-                    //         return (
-                    //             // <FontAwesome name="user" size={24} color="black" />
-                    //             <FontAwesome5 name="user-alt" size={24} color="black" />
-                    //         );
-                    //     } else {
-                    //         return (
-                    //             // <FontAwesome name="user-o" size={24} color="black" />
-                    //             <FontAwesome5 name="user" size={24} color="white" />
-                    //         );
-                    //     }
-                    // } else if (route.name === 'Inbox') {
-                    //     if (focused) {
-                    //         return (
-                    //             <AntDesign name='message1' color={'black'} size={24} />
-                    //         );
-                    //     } else {
-                    //         return (
-                    //             <AntDesign name='message1' color={'white'} size={24} />
-                    //         );
-
-                    //     }
-                    // }
-
-                    // else if (route.name === 'MedaillonContests') {
-                    //     if (iconName = focused) {
-                    //         return <Octicons name="home" size={size} color={color} />
-                    //     } else {
-                    //         return <Foundation name={iconName} size={size} color={color} />
-                    //     }
-                    // }
                 },
-                // tabBarActiveBackgroundColor: "gray",
-                // tabBarStyle: { backgroundColor: "black" },
-                // tabBarActiveTintColor: 'white',
-                // tabBarInactiveTintColor: 'white',
-                // tabBarActiveBackgroundColor: "white",
             })} >
             <HomeTab.Screen name="Home" component={Home} navigation={navigation} options={{
                 tabBarShowLabel: false,
@@ -258,14 +177,12 @@ export default function HomeTabs({ navigation }) {
                 tabBarStyle: {
                     backgroundColor: "black",
                     paddingBottom: 3,
-                    paddingTop: 3
+                    paddingTop: 3,
+                    position: "absolute",
+                    bottom: 0,
+                    zIndex: 0
                 },
                 tabBarIcon: ({ color }) => (
-                    // <Feather name="home" size={24} color={tabBarIconInfos.homeColor} />
-                    // <Entypo name="home" size={24} color={tabBarIconInfos.homeColor} />
-                    // <AntDesign name="home" size={24} color={tabBarIconInfos.homeColor} />
-                    // <Ionicons name="home" size={24} color={tabBarIconInfos.homeColor} />
-                    // <Ionicons name="ios-home-outline" size={24} color={tabBarIconInfos.homeColor} />
                     <Ionicons name={tabBarIconInfos.homeIconName} size={24} color={tabBarIconInfos.homeColor} />
 
                 ),
@@ -282,21 +199,16 @@ export default function HomeTabs({ navigation }) {
                 tabBarStyle: {
                     backgroundColor: "black",
                     paddingBottom: 3,
-                    paddingTop: 3
+                    paddingTop: 3,
+                    position: "absolute",
+                    bottom: 0,
+                    zIndex: 0
                 },
                 tabBarIcon: ({ color }) => (
-                    // <Feather name="trends" size={tabBarIconInfos.glassSize} color={tabBarIconInfos.trendsIconColor} />
-                    // <Ionicons name={tabBarIconInfos.trendsIconName} size={34} color={tabBarIconInfos.trendsIconColor} />
-                    // <FontAwesome5 name="poll" size={24} color={tabBarIconInfos.trendsIconColor} />
-                    // <AntDesign name="areachart" size={24} color={tabBarIconInfos.trendsIconColor} />
-                    // <Feather name="award" size={24} color={tabBarIconInfos.trendsIconColor} />
                     <Ionicons name={tabBarIconInfos.trendsIconName} size={24} color={tabBarIconInfos.trendsIconColor} />
                 )
             }} />
-            {/* <HomeTab.Screen name="Shop" component={Shop} options={{
-                title: 'Shop',
-                gestureEnabled: true,
-            }} /> */}
+
             <HomeTab.Screen name="Medaillon" component={Medaillon} navigation={navigation} options={({ route }) => ({
                 tabBarShowLabel: false,
                 tabBarLabel: '',
@@ -304,36 +216,17 @@ export default function HomeTabs({ navigation }) {
                 tabBarStyle: {
                     height: 0,
                     width: 0,
+                    position: "absolute",
+                    bottom: 0,
+                    zIndex: 0
                 },
                 headerShown: false,
                 tabBarIcon: ({ color }) => (
                     <FontAwesome name="plus-square-o" size={24} color={tabBarIconInfos.plusIconColor} />
                 )
-                // tabBarBadgeStyle: {
-                //     backgroundColor: "white",
-                //     borderTopWidth: 0,
-                //     borderTopColor: "white",
-                //     elevation: 0
-                // },
-                // backgroundColor: 'rgba(52, 52, 52, 0.8)',
 
-                // tabBarBadge: 3
             })} />
-            {/* <HomeTab.Screen name="Inbox" component={Inbox} options={{
-                tabBarShowLabel: false,
-                headerShown: false,
-                tabBarStyle: {
-                    backgroundColor: "white",
-                    paddingBottom: 3,
-                    paddingTop: 3
-                },
-                title: 'Inbox',
-                tabBarBadge: 3,
-                tabBarIcon: ({ color }) => (
-                    // <AntDesign name='message1' color={tabBarIconInfos.inboxColor} size={24} />
-                    <Ionicons name={tabBarIconInfos.inboxIconName} size={24} color={tabBarIconInfos.inboxColor} />
-                ),
-            }} /> */}
+
             <HomeTab.Screen name="Inbox" component={InboxStack} navigation={navigation} options={{
                 tabBarShowLabel: false,
                 headerShown: false,
@@ -343,7 +236,10 @@ export default function HomeTabs({ navigation }) {
                     // width: 0,
                     backgroundColor: "white",
                     paddingBottom: 3,
-                    paddingTop: 3
+                    paddingTop: 3,
+                    position: "absolute",
+                    bottom: 0,
+                    zIndex: 0
                 },
                 title: 'Inbox',
                 tabBarBadge: 3,
@@ -360,7 +256,10 @@ export default function HomeTabs({ navigation }) {
                 tabBarStyle: {
                     backgroundColor: "white",
                     paddingBottom: 3,
-                    paddingTop: 3
+                    paddingTop: 3,
+                    position: "absolute",
+                    bottom: 0,
+                    zIndex: 0
                 },
                 // headerRight: () => <Header title='Medaillon' navigation={navigation} />,
                 header: () => <ProfileHeader
@@ -379,13 +278,6 @@ export default function HomeTabs({ navigation }) {
                 // activeColor: "white",
                 gestureEnabled: true,
             }} />
-            {/* <HomeTab.Screen name="SinglePost" component={SinglePost} options={{
-                headerTitleStyle: { fontWeight: "600", fontSize: 22, }
-            }} /> */}
-            {/* <HomeTab.Screen name="EditProfile" component={EditProfile} initialParams={{ navigation }} options={{
-                // headerRight: () => <Header title='Medaillon' navigation={navigation} />,
-                header: () => <ProfileHeader title='andreas_sparre' navigation={navigation} />,
-            }} /> */}
         </HomeTab.Navigator >
     );
 }
