@@ -162,6 +162,7 @@ export default function HomeTabs({ navigation }) {
                     position: "absolute",
                     bottom: 0
                 },
+                // tabBarHideOnKeyboard: true,
                 activeColor: "white",
                 inactiveColor: "gray",
                 tabBarInactiveTintColor: "gray",
@@ -173,6 +174,7 @@ export default function HomeTabs({ navigation }) {
                 tabBarShowLabel: false,
                 headerTransparent: true,
                 headerShown: false,
+                tabBarHideOnKeyboard: true,
                 // headerRight: () => <Header title='Medaillon' navigation={navigation} />,
                 tabBarStyle: {
                     backgroundColor: "black",
@@ -196,6 +198,7 @@ export default function HomeTabs({ navigation }) {
                 tabBarShowLabel: false,
                 // header: () => <Header title='Medaillon' navigation={navigation} />,
                 title: 'Trends',
+                tabBarHideOnKeyboard: true,
                 tabBarStyle: {
                     backgroundColor: "black",
                     paddingBottom: 3,
@@ -230,6 +233,7 @@ export default function HomeTabs({ navigation }) {
             <HomeTab.Screen name="Inbox" component={InboxStack} navigation={navigation} options={{
                 tabBarShowLabel: false,
                 headerShown: false,
+                tabBarHideOnKeyboard: true,
                 headerTransparent: true,
                 tabBarStyle: {
                     // height: 0,
@@ -253,6 +257,7 @@ export default function HomeTabs({ navigation }) {
             }} /> */}
             <HomeTab.Screen name="Profile" component={Profile} navigation={navigation} options={{
                 tabBarShowLabel: false,
+                tabBarHideOnKeyboard: true,
                 tabBarStyle: {
                     backgroundColor: "white",
                     paddingBottom: 3,
