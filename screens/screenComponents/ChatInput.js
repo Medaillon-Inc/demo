@@ -95,6 +95,7 @@ const ChatInput = ({ onSend }) => {
             {showEmojiPicker && (
                 <EmojiSelector onEmojiSelected={onEmojiSelected} showSearchBar={false} showTabs={false} />
             )}
+            <View style={{ flex: 1, backgroundColor: "white", height: 20 }}></View>
         </View>
     );
 };
@@ -118,17 +119,22 @@ const ChatInput = ({ onSend }) => {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         flexDirection: 'row',
+        position: "absolute",
+        bottom: 30,
         alignItems: 'center',
         backgroundColor: '#fff',
         paddingHorizontal: 10,
         paddingVertical: 5,
     },
     emojiButton: {
-        marginRight: 5,
+        width: '10%',
+        // marginRight: 5,
     },
     input: {
-        flex: 1,
+        // flex: 1,
+        width: '77%',
         borderWidth: 1,
         borderColor: '#E0E0E0',
         borderRadius: 20,
@@ -137,7 +143,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     sendButton: {
-        width: 30,
+        width: '10%',
         height: 30,
         alignItems: 'center',
         justifyContent: 'center',

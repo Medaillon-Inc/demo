@@ -144,7 +144,7 @@ export default function Trends() {
     );
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "black", paddingBottom: 50 }}>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
             <View style={{ backgroundColor: '#141414', paddingTop: 20 }}>
                 <SearchBox />

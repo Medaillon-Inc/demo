@@ -53,7 +53,7 @@ const ProfileInfo = ({ isVerified }) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'column',
-        marginBottom: 20,
+        marginBottom: 15,
         marginTop: 15
     },
     imageContainer: {

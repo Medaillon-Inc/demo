@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     width: '100%',
+    paddingBottom: 50
   },
   postContainer: {
     width: '33.33%',

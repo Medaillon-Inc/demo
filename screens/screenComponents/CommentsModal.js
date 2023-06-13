@@ -41,6 +41,7 @@ const CommentsModal = ({ visible, closeModal }) => {
                     text: commentInput,
                     likes: 0,
                     liked: false,
+                    disLiked: false,
                     replyCount: 0,
                     showReplies: false,
                     timePassed: "Now",
@@ -116,6 +117,8 @@ const CommentsModal = ({ visible, closeModal }) => {
             text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac diam tortor. Integer sollicitudin, risus eget tristique hendrerit, arcu tellus vehicula lorem, eu elementum sapien sem et risus.',
             likes: 12,
             liked: false,
+            disLikes: 1,
+            disLiked: true,
             replyCount: 2,
             showReplies: false,
             replyClicks: 0,
@@ -133,6 +136,8 @@ const CommentsModal = ({ visible, closeModal }) => {
                     timePassed: "2h",
                     likes: 5,
                     liked: true,
+                    disLikes: 2,
+                    disLiked: false,
                 },
                 {
                     id: '1-1-1',
@@ -145,6 +150,8 @@ const CommentsModal = ({ visible, closeModal }) => {
                     timePassed: "26m",
                     likes: 3,
                     liked: false,
+                    disLikes: 9,
+                    disLiked: false,
                 },
             ],
         },
@@ -157,6 +164,8 @@ const CommentsModal = ({ visible, closeModal }) => {
             text: 'Vivamus in mi euismod, sollicitudin lectus vitae, laoreet turpis. Sed eget nunc vel nisi pulvinar suscipit. Donec nec dolor augue. Etiam condimentum sapien arcu, in facilisis augue posuere sit amet. ',
             likes: 3,
             liked: false,
+            disLikes: 10,
+            disLiked: false,
             replyCount: 0,
             showReplies: false,
             replyClicks: 0,
@@ -173,6 +182,8 @@ const CommentsModal = ({ visible, closeModal }) => {
             text: 'Praesent euismod ipsum id laoreet finibus. Maecenas tristique risus ac dui pharetra, nec fermentum dolor molestie. Etiam varius dictum mauris, ac vehicula nisi varius non. ',
             likes: 5,
             liked: true,
+            disLikes: 2,
+            disLiked: false,
             replyCount: 1,
             showReplies: false,
             replyClicks: 0,
@@ -190,6 +201,8 @@ const CommentsModal = ({ visible, closeModal }) => {
                     timePassed: "1w",
                     likes: 2,
                     liked: false,
+                    disLikes: 2,
+                    disLiked: false,
                 },
             ],
         },
@@ -209,6 +222,80 @@ const CommentsModal = ({ visible, closeModal }) => {
         });
     };
 
+    const onLikePress = (commentId) => {
+        setComments((prevComments) => {
+            return prevComments.map((comment) => {
+                if (comment.id === commentId) {
+                    if (comment.liked) {
+                        return { ...comment, likes: comment.likes - 1, liked: false };
+                    } else if (!comment.liked) {
+                        if (comment.disLiked) {
+                            return { ...comment, likes: comment.likes + 1, liked: true, disLikes: comment.disLikes - 1, disLiked: false };
+                        } else if (!comment.disLiked) {
+                            return { ...comment, likes: comment.likes + 1, liked: true };
+                        }
+                    }
+                } else {
+                    // Here we also check the replies of the comment
+                    if (comment.replies) {
+                        comment.replies = comment.replies.map((reply) => {
+                            if (reply.id === commentId) {
+                                if (reply.liked) {
+                                    return { ...reply, likes: reply.likes - 1, liked: false };
+                                } else if (!reply.liked) {
+                                    if (reply.disLiked) {
+                                        return { ...reply, likes: reply.likes + 1, liked: true, disLikes: reply.disLikes - 1, disLiked: false };
+                                    } else if (!reply.disLiked) {
+                                        return { ...reply, likes: reply.likes + 1, liked: true };
+                                    }
+                                }
+                            }
+                            return reply;
+                        });
+                    }
+                    return comment;
+                }
+            });
+        });
+    };
+
+    const dislikeComment = (id) => {
+        setComments((prevComments) => {
+            return prevComments.map((comment) => {
+                if (comment.id === id) {
+                    if (comment.disLiked) {
+                        return { ...comment, disLikes: comment.disLikes - 1, disLiked: false, };
+                    } else {
+                        if (comment.liked) {
+                            return { ...comment, disLikes: comment.disLikes + 1, disLiked: true, likes: comment.likes - 1, liked: false, };
+                        } else {
+                            return { ...comment, disLikes: comment.disLikes + 1, disLiked: true };
+                        }
+                    }
+                } else {
+                    // Here we also check the replies of the comment
+                    if (comment.replies) {
+                        comment.replies = comment.replies.map((reply) => {
+                            if (reply.id === id) {
+                                if (reply.disLiked) {
+                                    return { ...reply, disLikes: reply.disLikes - 1, disLiked: false, };
+                                } else {
+                                    if (reply.liked) {
+                                        return { ...reply, disLikes: reply.disLikes + 1, disLiked: true, likes: reply.likes - 1, liked: false };
+                                    } else {
+                                        return { ...reply, disLikes: reply.disLikes + 1, disLiked: true };
+                                    }
+                                }
+                            }
+                            return reply;
+                        });
+                    }
+                    return comment;
+                }
+            });
+        });
+    };
+
     const renderReplies = (replies, showReplies) => {
         if (!showReplies || !replies) return null;
 
@@ -216,20 +303,50 @@ const CommentsModal = ({ visible, closeModal }) => {
             const displayCount = Math.min(10, replies.length);
             if (index < displayCount) {
                 return (
-                    <View style={styles.comment}>
+                    <View style={styles.replyComment}>
                         <View style={styles.profilePhoto}>
                             <Image source={{ uri: reply.user.profile_picture }} style={{ width: 30, height: 30, borderRadius: 15 }} />
                         </View>
                         <View style={styles.replyCommentInfo}>
                             <Text style={styles.commentUsername}>{reply.user.username}</Text>
                             <Text style={styles.commentText}>{reply.text}</Text>
-                        </View>
-                        <View style={{ flexDirection: "row", flex: 1, }}>
-                            <TouchableOpacity style={{ flexDirection: "row" }} onPress={() => toggleReplies(reply.id)}>
-                                <Text style={styles.repliesText}>Hide replies</Text>
-                                <MaterialIcons name="arrow-drop-up" size={24} color="black"
-                                    style={{ flexDirection: "column", justifyContent: "center" }} />
-                            </TouchableOpacity>
+                            <View style={styles.commentUtilityButtons}>
+                                <View style={{ flexDirection: "row", flex: 1, }}>
+                                    <Text style={{ flexDirection: "column", color: "gray", fontSize: 12, paddingEnd: 10 }}>{reply.timePassed}</Text>
+                                    <TouchableOpacity style={{ flexDirection: "column", flex: 1 }}>
+                                        <View style={{ flexDirection: "column", flex: 1 }}>
+                                            <Text style={styles.repliesText}>Answer</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    <View style={{ flexDirection: "row", justifyContent: "flex-end", marginEnd: 20 }}>
+                                        <TouchableOpacity
+                                            style={{ marginEnd: 5 }}
+                                            onPress={() => onLikePress(reply.id)}
+                                        >
+                                            <AntDesign
+                                                name={reply.liked ? "heart" : "hearto"}
+                                                size={18}
+                                                color={reply.liked ? "black" : "black"}
+                                            />
+                                        </TouchableOpacity>
+                                        <Text>{reply.likes}</Text>
+                                    </View>
+                                    <TouchableOpacity style={{ flexDirection: "column", justifyContent: "flex-end" }}
+                                        onPress={() => dislikeComment(reply.id)}>
+                                        <AntDesign name={reply.disLiked ? "dislike1" : "dislike2"} size={18} color={reply.disLiked ? "black" : "black"} />
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={{ flexDirection: "row", marginTop: 12 }}>
+                                    <View style={{ flexDirection: "row", flex: 1, justifyContent: "flex-end" }}>
+                                        <TouchableOpacity style={{ flexDirection: "row", flex: 1, justifyContent: "flex-end", }}
+                                            onPress={() => toggleReplies(reply.id.split("-")[0])}>
+                                            <Text style={styles.repliesText}>Hide replies</Text>
+                                            <MaterialIcons name="arrow-drop-up" size={24} color="black"
+                                                style={{ flexDirection: "column", justifyContent: "center" }} />
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                            </View>
                         </View>
                     </View>
                 )
@@ -264,12 +381,23 @@ const CommentsModal = ({ visible, closeModal }) => {
                                     {/* <MaterialIcons name="arrow-drop-down" size={24} color="black" /> */}
                                 </View>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{ flexDirection: "column", justifyContent: "flex-end", marginEnd: 20 }}>
-                                <AntDesign name="like2" size={18} color="black" />
+                            <View style={{ flexDirection: "row", justifyContent: "flex-end", marginEnd: 20 }}>
+                                <TouchableOpacity
+                                    style={{ marginEnd: 5 }}
+                                    onPress={() => onLikePress(item.id)}
+                                >
+                                    <AntDesign
+                                        name={item.liked ? "heart" : "hearto"}
+                                        size={18}
+                                        color={item.liked ? "black" : "black"}
+                                    />
+                                </TouchableOpacity>
+                                <Text>{item.likes}</Text>
+                            </View>
+                            <TouchableOpacity style={{ flexDirection: "column", justifyContent: "flex-end" }} onPress={() => dislikeComment(item.id)}>
+                                <AntDesign name={item.disLiked ? "dislike1" : "dislike2"} size={18} color={item.disLiked ? "black" : "black"} />
                             </TouchableOpacity>
-                            <TouchableOpacity style={{ flexDirection: "column", justifyContent: "flex-end" }}>
-                                <AntDesign name="dislike2" size={18} color="black" />
-                            </TouchableOpacity>
+
                         </View>
                         {item.replies.length > 0 && !item.showReplies && (
                             <View style={{ flexDirection: "column", flex: 1 }}>
@@ -368,10 +496,18 @@ const styles = StyleSheet.create({
     modalContent: {
         flex: 1,
         flexDirection: "row",
+        paddingBottom: 210
+    },
+    replyComment: {
+        marginTop: 0,
+        flex: 1,
+        flexDirection: "row",
+        paddingHorizontal: 10,
+        // justifyContent: "flex-start"
     },
     comment: {
-        marginTop: 20,
-        // flex: 1,
+        marginTop: 15,
+        flex: 1,
         flexDirection: "row",
         paddingHorizontal: 10,
         // justifyContent: "flex-start"
@@ -387,6 +523,7 @@ const styles = StyleSheet.create({
     },
     replyCommentInfo: {
         flexDirection: "column",
+        flex: 1,
         paddingHorizontal: 10
     },
     commentUsername: {
@@ -403,23 +540,24 @@ const styles = StyleSheet.create({
         color: "rgb(50,50,50)",
     },
     inputContainer: {
-        flex: 1,
-        flexDirection: 'row',
+        // flex: 1,
+        // flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         position: "absolute",
         bottom: 127,
         paddingHorizontal: 10,
-        paddingBottom: 10,
+        // paddingBottom: 10,
         zIndex: 2,
         width: '100%',
+        height: '10%',
         backgroundColor: "white",
     },
     inputs: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        flex: 1,
+        // flex: 1,
         backgroundColor: "white",
     },
     input: {

@@ -1,8 +1,9 @@
 import React from 'react';
-import { ScrollView, View, StyleSheet } from 'react-native';
+import { ScrollView, View, StyleSheet, TouchableOpacity } from 'react-native';
 import StoryHighlight from './StoryHighlight';
+import { AntDesign } from '@expo/vector-icons';
 
-const ProfileHighlights = ({navigation}) => {
+const ProfileHighlights = ({ navigation }) => {
   const highlights = [
     { imageUri: 'https://instagram.fesb3-2.fna.fbcdn.net/v/t51.2885-15/342367717_3331442930501053_6674924536866841428_n.jpg?stp=dst-jpg_e35_p1080x1080&_nc_ht=instagram.fesb3-2.fna.fbcdn.net&_nc_cat=1&_nc_ohc=I56-yMwGL8IAX9C3sDG&edm=ACWDqb8BAAAA&ccb=7-5&ig_cache_key=MzA4Njc4NjU3OTQxODY0ODY5NA%3D%3D.2-ccb7-5&oh=00_AfBJ2G7FUkxvY93W23kn25HydEx1XSEOBVv9HpwE8w84EA&oe=644B3E63&_nc_sid=1527a3', title: 'Venice FF \‘22' },
     { imageUri: 'https://instagram.fesb3-2.fna.fbcdn.net/v/t51.2885-15/296879881_132213442622598_6399791841678177510_n.jpg?stp=c0.455.1170.1170a_dst-jpg_e35_s150x150&_nc_ht=instagram.fesb3-2.fna.fbcdn.net&_nc_cat=106&_nc_ohc=yVXGCDEyRKQAX_1VGPn&edm=ANmP7GQBAAAA&ccb=7-5&oh=00_AfAozwNDsQqnbvW-yW79v-K-YDIH-LajQNt1gK3Jdlq_hA&oe=6446CF44&_nc_sid=276363', title: 'Aug ‘22 Celebs' },
@@ -23,6 +24,17 @@ const ProfileHighlights = ({navigation}) => {
             navigation={navigation}
           />
         ))}
+        <TouchableOpacity
+          style={{
+            marginBottom: 25,
+            marginTop: 5,
+            marginLeft: 20,
+            marginRight: 25,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <AntDesign name="pluscircleo" style={{ fontSize: 40, color: 'rgba(150, 150, 150, 1)' }} />
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );

@@ -43,7 +43,7 @@ const EditProfile = ({ route, navigation }) => {
             </View>
             <View style={{ padding: 20, alignItems: 'center' }}>
                 <Image
-                    source={{ uri: profileImage }}
+                    source={{ profileImage }}
                     style={{ width: 80, height: 80, borderRadius: 100 }}
                 />
                 <Text
@@ -130,7 +130,7 @@ const EditProfile = ({ route, navigation }) => {
                         borderBottomWidth: 1,
                         borderColor: '#EFEFEF',
                     }}>
-                    Persnol information setting
+                    Personal information setting
                 </Text>
             </View>
         </View>

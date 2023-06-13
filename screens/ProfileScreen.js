@@ -64,6 +64,7 @@ import ProfileInfo from './screenComponents/ProfileInfo';
 import ProfileBio from './screenComponents/ProfileBio';
 import ProfileHighlights from './screenComponents/ProfileHighlights';
 import ProfilePosts from './screenComponents/ProfilePosts';
+import ProfileUtilityButton from './screenComponents/ProfileUtilityButton';
 
 const ProfileScreen = ({ navigation }) => {
   return (
@@ -72,6 +73,8 @@ const ProfileScreen = ({ navigation }) => {
         <ProfileInfo isVerified={true} />
         {/* <ProfileBio /> */}
       </View>
+      <ProfileUtilityButton navigation={navigation} name={"Andreas Sparre"} accountName={"andreas_sparre"}
+        profileImage={require('../storage/images/userProfile.png')} />
       <ProfileHighlights navigation={navigation} />
       <ProfilePosts />
     </ScrollView>
